@@ -1,0 +1,33 @@
+body{
+    background-color: black;
+}
+#tonda{
+    position: absolute;
+    top: 0; left: 0;
+
+    transform: translate(-50%, -50%);
+
+    width: 100vw;
+    height: 100vh;
+}
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+#tonda{
+    animation: rotate 5s infinite linear; /* Apply animation */
+}
+#box{
+    color: red;
+    text-shadow: 0 0 4px white;
+    font-size: 2em;
+
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%); 
+}
+  
