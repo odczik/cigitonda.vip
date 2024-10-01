@@ -14,38 +14,46 @@
         color: white;
     }
     #menu{
-        top: 0; left: 0;
+        top: 0; left: -45vh;
         position: absolute;
         height: 100vh;
-        width: 40vw;
+        width: 50vh;
 
         display: flex;
 
         font-family: "Roboto", sans-serif;
+        transition: 1s;
     }
     #menu nav{
         width: 100%;
         background-color: rgba(48,48,48);
     }
-    .arrow{
+    #arrow{
         position: absolute;
         width: 5vh;
         height: 5vh;
+        transition: 1s;
+        cursor: pointer;
     }
-    .arrow{
+    #arrow{
         position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 47.5vh;
     }
-    #menu:hover + .arrow{
-        background-color: aliceblue;
+    #menu nav:hover + #arrow{
+        transform: rotate(180deg);
+    }
+    #arrow:hover{
+        transform: rotate(180deg);
+    }
+    #menu:hover{
+        left: 0;
     }
 </style>
 <body>
     
     <nav id="menu">
         <nav></nav>
-        <img src="assets/pointerArrow.png" class="arrow">
+        <img src="assets/pointerArrow.png" id="arrow">
     </nav>
 
 </body>
