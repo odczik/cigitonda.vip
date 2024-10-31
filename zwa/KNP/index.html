@@ -13,7 +13,12 @@
         color: white;
         font-family: "Bebas Neue", sans-serif;
         
-        font-size: 2em;
+        font-size: 3em;
+
+        inset: 0 0 0 0;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-fill-color: transparent;
+        -webkit-text-stroke-color: white;
     }
     #a, #b{
         color: rgba(0,0,0,0);
@@ -30,17 +35,18 @@
         width: 60vw; height: 60vh;
         max-width: 80vh; max-height: 80vw;
         
-        background-color: rgba(255,0,0,0.2);
+        border: .1vh solid white;
+        border-radius: 7px;
+
+        background-color: rgba(255,255,255,0.1);
+        box-shadow: 0 0 8px white;
     }
 </style>
 <body> 
 
     <nav>
-        <div id="a">rock paper scissors</div>
-        <div>rock paper scissors</div>
-        <div id="b">rock paper scissors</div>
+        rock paper scisors
     </nav>
-
     <main>
 
 
