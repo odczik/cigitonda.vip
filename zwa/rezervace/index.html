@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>rezervace</title>
+</head>
+<style>
+    body{
+        background-color: black;
+        color: white;
+
+        font-family: 'Times New Roman', Times, serif;
+    }
+    h3{
+        text-align: center;
+    }
+    main{
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 50vh; height: 80vh;
+        max-width: 80vw;
+        border: solid white 0.1vh;
+        border-radius: 5px;
+    }
+    nav{
+        width: 90%; height: 30%;
+        padding: 5%;
+
+        display: flex;
+
+        position: relative;
+    }
+    input, select{
+        color: white;
+        background-color: rgba(0,0,0,0);
+        border: none;
+        border-bottom: 0.1vh solid white;
+        width: 60%;
+        margin-right: 3%;
+    }
+    #st div, #nd div{
+        margin-bottom: 10%;
+    }
+    #st{
+        padding-right: 5%;
+    }
+    option{
+        color: black;
+    }
+    #poznamkaContainer{
+        position: absolute;
+        width: 80%;
+    }
+    #poznamkaContainer{
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    button{
+        background-color: black;
+        border: 0.1vh solid white;
+        padding: 2%;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+
+        width: 50%;
+        position: absolute;
+    }
+    button{
+        position: relative;
+        left: 50%; top: 10%;
+        transform: translateX(-50%);
+        transition: 0.8s;
+    }
+    button:hover{
+        background-color: white;
+        color: black;
+        transition: 0.4s;
+    }
+</style>
+<body>
+    
+    <main>
+        <h3>REZERVACE</h3>
+        <nav>
+            <div id="st">
+                <div>
+                    <label for="jmeno">jmeno</label>
+                    <input type="text" id="jmeno">
+                </div>
+                <div>
+                    <label for="datum">datum</label>
+                    <input type="date" id="datum">
+                </div>
+                <div>
+                    <label for="stul">stůl</label>
+                    <select id="stul">
+                        <option value="okno">u okna</option>
+                        <option value="bar">u baru</option>
+                        <option value="random">necham se prekvapit</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="svicka">barva svicky</label>
+                    <input type="color" id="svicka" style="width: 40%; height: 2.8vh;">
+                </div>
+                <div>
+                    <label for="telefon">telefon</label>
+                    <input type="tel" id="telefon">
+                </div>
+            </div>
+            <div id="nd">
+                <div>
+                    <label for="prijmeni">prijmeni</label>
+                    <input type="text" id="prijmeni">
+                </div>
+                <div>
+                    <label for="cas">cas</label>
+                    <input type="time" id="cas">
+                </div>
+                <div>
+                    <label for="doba">navsteva</label>
+                    <select id="doba">
+                        <option value="1">1 hodina</option>
+                        <option value="2">2 hodiny</option>
+                        <option value="4">4 hodiny</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="email">email</label>
+                    <input type="email" id="email">
+                </div>
+                <div>
+                    <label for="satna">satny</label>
+                    <input type="checkbox" id="satna">
+                </div>
+            </div>
+        </nav>
+        <div id="poznamkaContainer">
+            <label for="poznamka">poznamka: </label>
+            <input id="poznamka" style="height: 5vh; background-color: rgba(100,100,100,0.4); border: 0.1vh solid white; border-radius: 5px;" type="text">
+        </div>
+        <button>
+            rezervovat
+        </button>
+    </main>
+
+</body>
+</html>
