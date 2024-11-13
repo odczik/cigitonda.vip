@@ -9,10 +9,18 @@
     body{
         background-color: black;
     }
-    th{
+    #me th{
         background-color: red;
         width: 5vh; height: 5vh;
     }
+    #me th:hover{
+        background-color: blue;
+    }
+    #op th{
+        background-color: green;
+        width: 5vh; height: 5vh;
+    }
+    
     button{
         position: absolute;
         top: 99%; left: 2%;
@@ -27,20 +35,41 @@
     }
     button:hover{
         box-shadow: 0 0 5px white;
-        transition: 0.2s;
+        transition: 0.1s;
+    }
+    #me{
+        position: absolute;
+        top: 100%; left: 50%;
+        transform: translate(-50%, -100%);
+    }
+    #op{
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+    }
+    #me table{
+        margin: auto;
+    }
+    #op table{
+        margin: auto;
     }
 </style>
 <body>
     
     <button onclick="resetId()">reconnect</button>
     <main>
-        <nav id="me">
-            <table id="myTable"></table>
-        </nav>
         <nav id="op">
+            <table id="opTable">
 
+            </table>
+        </nav>
+        <nav id="me">
+            <table id="myTable">
+                
+            </table>
         </nav>
     </main>
 
+    <script src="script.js"></script>
 </body>
 </html>

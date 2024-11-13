@@ -1,12 +1,13 @@
+const connection = new WebSocket("ws://localhost:8080");
+const myTable = document.getElementById('myTable')
+const opTable = document.getElementById('opTable')
 var ME = {
     ships: [],
-    id: Math.floor(Math.random()*1000),
-    table: document.getElementById('me')
+    id: Math.floor(Math.random()*1000)
 }
 var OP = {
     ships: [],
-    id: 0,
-    table: document.getElementById('op') 
+    id: 0
 }
 
 connection.onopen = () => {
@@ -30,7 +31,25 @@ connection.onmessage = (event) => {
 function resetId(){
     ME.id = Math.floor(Math.random()*1000)
 }
+function generateTable(table){
 
+    for(let y = 0; y<8; y++){
+
+        let row = document.createElement('tr')
+        row.id = `row${y}`
+
+        for(let x = 0; x<8; x++){
+
+            let cell = document.createElement('th')
+            cell.id = `${x}-${y}`
+            row.appendChild(cell)
+        }
+
+        table.appendChild(row)
+    }
+}
+generateTable(myTable)
+generateTable(opTable)
 var mainInterval = setInterval(() => {
     
     const data = ME
