@@ -9,27 +9,26 @@
     body{
         background-color: black;
     }
-    img{
-        width: 2vh; height: 2vh;
+    #opTable img, #myTable img{
+        position: absolute;
     }
-    td{
-        width: 5px; height: 5px;
-        max-width: 5px; max-height: 5px;
+    #opTable img, #myTable img{
+        position: relative;
+        top: 50%; left: 50%;
 
+        transform: translate(-50%, -50%);
+
+        width: 3vh;
+    }
+    #myTable div, #opTable div{
+        background-color: red;
+        width: 3vh; height: 3vh;
         cursor: pointer;
-        
-        border: 0px solid black;
-        padding: 0; margin: 0;
     }
     table{
         background-color: white;
         width: 30vh; height: 30vh;
-    }
-    #me td{
-        background-color: red;
-    }
-    #op td{
-        background-color: green;
+        user-select: none;
     }
     button{
         position: absolute;
@@ -67,9 +66,51 @@
 
         color: white;
     }
+    #ne{
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+        
+        background-color: black;
+
+        z-index: 0;
+        opacity: 0;
+    }
+    #ne div{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100vw;
+
+        cursor: default;
+
+        text-align: center;
+
+        color: white;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+    }
+    #info{
+        cursor: default;
+        color: white;
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: bold;
+
+        position: absolute;
+        top: 50%;
+        text-align: center;
+        width: 100vw;
+    }
+    @media(max-width: 550px){
+
+        #ne{
+            z-index: 999;
+            opacity: 1;
+        }
+    }
 </style>
 <body>
-    
+    <div id="ne"><div>nepodporované rozlišení</div></div>
     <button onclick="resetId()">reconnect</button>
     <main>
         <nav id="op">
@@ -77,6 +118,7 @@
 
             </table>
         </nav>
+        <div id="info">polož svých 10 lodí a počkej na soupře než udělá to stejné</div>
         <nav id="me">
             <table id="myTable">
                 
