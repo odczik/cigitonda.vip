@@ -9,18 +9,28 @@
     body{
         background-color: black;
     }
-    #me th{
-        background-color: black;
-        width: 4vh; height: 4vh;
+    img{
+        width: 2vh; height: 2vh;
     }
-    #me th:hover{
-        background-color: blue;
+    td{
+        width: 5px; height: 5px;
+        max-width: 5px; max-height: 5px;
+
+        cursor: pointer;
+        
+        border: 0px solid black;
+        padding: 0; margin: 0;
     }
-    #op th{
+    table{
+        background-color: white;
+        width: 30vh; height: 30vh;
+    }
+    #me td{
+        background-color: red;
+    }
+    #op td{
         background-color: green;
-        width: 4vh; height: 4vh;
     }
-    
     button{
         position: absolute;
         top: 99%; left: 2%;
@@ -47,6 +57,16 @@
         top: 5%; left: 50%;
         transform: translateX(-50%);
     }
+    #opBlock{
+        position: absolute;
+        top: 5%; left: 50%;
+        transform: translateX(-50%);
+
+        background-color: rgba(255,255,255,.2);
+        width: 40vh; height: 40vh;
+
+        color: white;
+    }
 </style>
 <body>
     
@@ -62,6 +82,7 @@
                 
             </table>
         </nav>
+
     </main>
 
     <script src="script.js"></script>

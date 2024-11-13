@@ -1,6 +1,6 @@
+/*
 const connection = new WebSocket("ws://localhost:8080");
-const myTable = document.getElementById('myTable')
-const opTable = document.getElementById('opTable')
+
 var ME = {
     ships: [],
     id: Math.floor(Math.random()*1000)
@@ -28,10 +28,12 @@ connection.onmessage = (event) => {
 
     if(data.id != ME.id) OP = data
 }
+*/
 function resetId(){
-    ME.id = Math.floor(Math.random()*1000)
+    // ME.id = Math.floor(Math.random()*1000)
+    console.log(ME.id)
 }
-function generateTable(table){
+function generateTable(tableId){
 
     for(let y = 0; y<10; y++){
 
@@ -40,30 +42,30 @@ function generateTable(table){
 
         for(let x = 0; x<10; x++){
 
-            let cell = document.createElement('th')
+            let cell = document.createElement('td')
             cell.id = `${x}-${y}`
 
-            cell.addEventListener('click', e => {
+            cell.addEventListener('mousedown', e => {
                 if(e.button == 2 && ME.ships.length < 10){
                     ME.ships.push([x, y])
                     console.log(ME.ships)
                 }
             })
+            if(tableId == 'opTable'){
+                cell.addEventListener('mouseover', () => {
+
+                })
+            }
 
             row.appendChild(cell)
         }
 
-        table.appendChild(row)
+        document.getElementById(tableId).appendChild(row)
     }
 }
-generateTable(myTable)
-generateTable(opTable)
-var mainInterval = setInterval(() => {
-    
-    const data = ME
+generateTable('myTable')
+generateTable('opTable')
 
-    try{
-        connection.send(JSON.stringify(data));
-    }catch(error){}
-
-}, 15)
+document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+});
