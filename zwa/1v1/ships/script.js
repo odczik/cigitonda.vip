@@ -33,15 +33,23 @@ function resetId(){
 }
 function generateTable(table){
 
-    for(let y = 0; y<8; y++){
+    for(let y = 0; y<10; y++){
 
         let row = document.createElement('tr')
         row.id = `row${y}`
 
-        for(let x = 0; x<8; x++){
+        for(let x = 0; x<10; x++){
 
             let cell = document.createElement('th')
             cell.id = `${x}-${y}`
+
+            cell.addEventListener('click', e => {
+                if(e.button == 2 && ME.ships.length < 10){
+                    ME.ships.push([x, y])
+                    console.log(ME.ships)
+                }
+            })
+
             row.appendChild(cell)
         }
 
