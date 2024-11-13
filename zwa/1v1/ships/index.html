@@ -6,14 +6,28 @@
     <title>ships</title>
 </head>
 <style>
+    body{
+        background-color: black;
+    }
     th{
         background-color: red;
         width: 5vh; height: 5vh;
     }
     button{
         position: absolute;
-        top: 99%; left: 1%;
+        top: 99%; left: 2%;
         transform: translateY(-100%);
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(0,0,0,0);
+        color: white;
+        padding: 0.5%;
+        transition: 0.5s;
+        cursor: pointer;
+    }
+    button:hover{
+        box-shadow: 0 0 5px white;
+        transition: 0.2s;
     }
 </style>
 <body>

@@ -1,10 +1,12 @@
 var ME = {
     ships: [],
-    id: Math.floor(Math.random()*1000)
+    id: Math.floor(Math.random()*1000),
+    table: document.getElementById('me')
 }
 var OP = {
     ships: [],
-    id: 0
+    id: 0,
+    table: document.getElementById('op') 
 }
 
 connection.onopen = () => {
@@ -29,8 +31,12 @@ function resetId(){
     ME.id = Math.floor(Math.random()*1000)
 }
 
-const data = ME
+var mainInterval = setInterval(() => {
+    
+    const data = ME
 
-try{
-    connection.send(JSON.stringify(data));
-}catch(error){}
+    try{
+        connection.send(JSON.stringify(data));
+    }catch(error){}
+
+}, 15)
