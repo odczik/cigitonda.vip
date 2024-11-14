@@ -1,17 +1,18 @@
 const connection = new WebSocket("ws://localhost:8080");
-
 var ME = {
     ships: [],
     id: Math.floor(Math.random()*1000),
     hover: ['',''],
-    bombs: []
+    bombs: [],
 }
 var OP = {
     ships: [],
     id: 0,
     hover: ['',''],
-    bombs: []
+    bombs: [],
 }
+if(ME.id > OP.id) ME.myMove = true
+
 console.log(ME.id)
 connection.onopen = () => {
     console.log("WebSocket is open now.");
@@ -32,7 +33,7 @@ connection.onmessage = (event) => {
     if(data.id != ME.id) OP = data
 
     if(ME.ships.length >= 10 && OP.ships.length >= 10){
-        document.getElementById('info').style.opacity = '0'
+        document.getElementById('info').innerText = ''
     }
 
     for(let i of OP.bombs){
@@ -58,7 +59,9 @@ connection.onmessage = (event) => {
             console.log(i)
         }
     }
-    // console.log(OP)
+
+    if(ME.ships.length == 10 && OP.ships.length == 10) document.getElementById('info').innerText = (ME.bombs.length == OP.bombs.length && ME.id > OP.id) || (ME.bombs.length < OP.bombs.length && ME.id < OP.id) ? 'si na tahu' : 'soupeřův tah'
+
 }
 function sendData(){
     
@@ -107,7 +110,7 @@ function generateTable(tableId){
             if(tableId == 'myTable'){
                 div.addEventListener('mousedown', e => {
             
-                    if(e.button == 0 && ME.ships.length < 10 && !includesArr(ME.ships, [x, y])){
+                    if(!victory() && e.button == 0 && ME.ships.length < 10 && !includesArr(ME.ships, [x, y])){
             
                         ME.ships.push([x, y])
                         img.src = 'assets\\ship.png'
@@ -115,23 +118,29 @@ function generateTable(tableId){
                 })
             }else{
                 div.addEventListener('mousedown', e => {
-                    
-                    if(e.button == 0 && ME.ships.length == 10 && OP.ships.length == 10){
 
-                        ME.bombs.push([x, y])
+                    if(!victory() && (ME.bombs.length == OP.bombs.length && ME.id > OP.id) || (ME.bombs.length < OP.bombs.length && ME.id < OP.id)){
+                        if(e.button == 0 && ME.ships.length == 10 && OP.ships.length == 10){
+
+                            ME.bombs.push([x, y])
+                        }
                     }
                 })
             }
 
             div.addEventListener('mouseover', () => {
-                div.style.boxShadow = 'inset 5px 5px 0 white, inset -5px -5px 0 white'
-                if(tableId == 'myTable') ME.hover[0] = div.id
-                else ME.hover[1] = div.id
+                if(!victory()){
+                    div.style.boxShadow = 'inset 5px 5px 0 white, inset -5px -5px 0 white'
+                    if(tableId == 'myTable') ME.hover[0] = div.id
+                    else ME.hover[1] = div.id
+                }
             })
             div.addEventListener('mouseleave', () => {
-                div.style.boxShadow = ''
-                if(ME.hover[0] == div.id) ME.hover[0] = ''
-                else if(ME.hover[1] == div.id) ME.hover[1] = ''
+                if(!victory()){
+                    div.style.boxShadow = ''
+                    if(ME.hover[0] == div.id) ME.hover[0] = ''
+                    else if(ME.hover[1] == div.id) ME.hover[1] = ''
+                }
             })
             div.appendChild(img)
             cell.appendChild(div)
