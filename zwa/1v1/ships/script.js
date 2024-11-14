@@ -41,6 +41,12 @@ connection.onmessage = (event) => {
     for(let i of ME.bombs){
         document.getElementById(`img${i[0]}-${i[1]}-o`).src = 'assets\\cross.png'
     }
+    for(let i of ME.ships){
+
+        if(includesArr(OP.bombs, i)){
+            document.getElementById(`img${i[0]}-${i[1]}`).style.transform = 'rotate(90deg)'
+        }
+    }
     console.log(OP)
 }
 function sendData(){
