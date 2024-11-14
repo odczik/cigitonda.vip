@@ -36,18 +36,29 @@ connection.onmessage = (event) => {
     }
 
     for(let i of OP.bombs){
-        document.getElementById(`cell${i[0]}-${i[1]}`).style.backgroundColor = 'black'
+        if(!includesArr(ME.ships, i)) document.getElementById(`img${i[0]}-${i[1]}`).src = 'assets\\cross.png'
+        else document.getElementById(`cell${i[0]}-${i[1]}`).style.backgroundColor = 'black'
     }
     for(let i of ME.bombs){
-        document.getElementById(`img${i[0]}-${i[1]}-o`).src = 'assets\\cross.png'
+        if(includesArr(OP.ships, i)){
+            document.getElementById(`cell${i[0]}-${i[1]}-o`).style.backgroundColor = 'black'
+
+            let element = document.getElementById(`img${i[0]}-${i[1]}-o`)
+            element.src = 'assets\\ship.png'
+            element.style.transform = 'translate(-50%, -50%) rotate(180deg)'
+        }else{
+
+            document.getElementById(`img${i[0]}-${i[1]}-o`).src = 'assets\\cross.png'
+        }
     }
     for(let i of ME.ships){
 
         if(includesArr(OP.bombs, i)){
-            document.getElementById(`img${i[0]}-${i[1]}`).style.transform = 'rotate(90deg)'
+            document.getElementById(`img${i[0]}-${i[1]}`).style.transform = 'translate(-50%, -50%) rotate(180deg)'
+            console.log(i)
         }
     }
-    console.log(OP)
+    // console.log(OP)
 }
 function sendData(){
     
