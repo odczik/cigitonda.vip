@@ -1,7 +1,8 @@
 const WebSocket = require('ws');
+require('dotenv').config()
 
 // starts server instance on http://localhost:8080
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: process.env.PORT | 8080 });
 
 // waits for connection to be established from the client
 // the callback argument ws is a unique for each client
