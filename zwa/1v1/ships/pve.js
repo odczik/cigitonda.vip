@@ -118,7 +118,6 @@ window.addEventListener('mouseup', e => {
 
         if(includesArr(OP.bombs, i)){
             document.getElementById(`img${i[0]}-${i[1]}`).style.transform = 'translate(-50%, -50%) rotate(180deg)'
-            console.log(i)
         }
     }
     if(ME.ships.length >= 10) document.getElementById('info').innerText = ''
