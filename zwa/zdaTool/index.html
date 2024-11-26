@@ -3,85 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>sql generator</title>
 </head>
-<style>
-    body{
-        background-color: black;
-        overflow: hidden;
-    }
-    main{
-        position: absolute;
-        top: 0; left: 0;
-        width: 100vw; height: 100vh;
-    }
-    #myCanvas, #landscape{
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-    }
-    .customMenu{
-        position: absolute;
-        top: 10%; left: 10%;
-
-        backdrop-filter: blur(3px);
-        border: 0.1vh solid white;
-        box-shadow: 0 0 1vh rgba(255,255,255,0.6);
-        border-radius: 5px;
-
-        padding: 0.25%;
-        color: white;
-
-        width: 6%; height: auto;
-        cursor: pointer;
-    }
-    .customMenu li{
-        margin: 5%;
-        padding-top: 5%; padding-bottom: 5%;
-        padding-left: 15%; padding-right: 15%;
-
-        list-style-type: none;
-    }
-    .customMenu li:hover{
-        background-color: rgba(100,100,100);
-        border-radius: 5px;
-    }
-    .tabulka{
-        position: absolute;
-        border: 0.1vh solid white;
-        width: 16vw;
-
-        color: white;
-
-        backdrop-filter: blur(3px);
-        border: 0.1vh solid white;
-        box-shadow: 0 0 1vh rgba(255,255,255,0.6);
-        border-radius: 5px;
-        font-family: 'Courier New', Courier, monospace;
-    }
-    .tabulka h3{
-        text-align: center;
-        border-bottom: 0.1vh solid white;
-    }
-    .tabulka nav{
-        display: flex;
-    }
-    .tabulka div{
-        padding: 2%; margin: 3%;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    .tabulka div:hover{
-        background-color: rgba(255,255,255,0.4);
-        transition: 0.1s;
-    }
-    .atribut, .dataTyp{
-        width: 15%;
-    }
-    .nazev{
-        width: 70%;
-    }
-</style>
 <body>
     
     <main>
@@ -93,7 +17,14 @@
         <div class="tabulka">
             <h3>tabulka0</h3>
             
-            <nav><div class="atribut">#</div><div class="nazev">kys</div><div id="dataTyp">🕜</div></nav>
+            <nav><div class="atribut">#</div><div class="nazev"><input type="text"></div><div class="dataTyp">🕜</div></nav>
+            
+            <nav>
+                <div class="atribut">*</div>
+                <div class="nazev"><input type="text"></div>
+                <div class="dataTyp">txt</div>
+            </nav>
+            
 
         </div>
     </main>
