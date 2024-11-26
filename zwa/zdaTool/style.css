@@ -18,21 +18,21 @@ main{
     position: absolute;
     top: 10%; left: 10%;
 
-    backdrop-filter: blur(3px);
-    border: 0.1vh solid white;
-    box-shadow: 0 0 1vh rgba(255,255,255,0.6);
+    backdrop-filter: blur(2px);
+    /* border: 0.1vh solid white; */
+    box-shadow: 0 0 0.3vh white inset;
     border-radius: 5px;
 
     padding: 0.25%;
     color: white;
 
-    width: 6%; height: auto;
+    width: auto; height: auto;
     cursor: pointer;
+    background-color: rgba(100,100,100,0.6);
 }
 .customMenu li{
-    margin: 5%;
-    padding-top: 5%; padding-bottom: 5%;
-    padding-left: 15%; padding-right: 15%;
+    padding: 0.5vw;
+    margin: 0.2vw;
 
     list-style-type: none;
 }
@@ -41,11 +41,11 @@ main{
     border-radius: 5px;
 }
 .tabulka{
+    position: absolute;
     cursor: move;
     
     user-select: none;
 
-    position: absolute;
     border: 0.1vh solid white;
     width: 16vh;
 
@@ -70,6 +70,7 @@ main{
     background: none;
     border: none;
     border-bottom: 0.1vh solid white;
+    height: 100%;
 }
 .tabulka nav{
     display: flex;
@@ -94,7 +95,7 @@ main{
 }
 @media (orientation: portrait){
     .tabulka{
-        width: 16vw;
+        width: 17vw;
     }
     .tabulka div{
         padding: 0.3vw; margin: 0.2vw;
