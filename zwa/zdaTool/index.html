@@ -17,7 +17,27 @@
         <ul class="customMenu" id="landscapeMenu">
             <li onclick="createTable(event)">přidat tabulku</li>
         </ul>
+
+        <nav id="output">
+            <nav class="tableSql">
+                <h3>tabulka0</h3>
+                create table Tabulka1(<br>
+                    id counert(16) not null primary key,<br>
+                    jmeno varchar(255) not null,<br>
+                    prijmeni varchar(255) not null
+                    <br>
+                );
+            </nav>
+            <nav class="tableSql">
+                <h3>tabulka0</h3>
+                insert into KYS(id, jmeno, prijmeni)
+                values(512, David, Mastny)
+            </nav>
+        </nav>
     </main>
+    <div id="nn">
+        <div>rozlišení není podporováno</div>
+    </div>
 
     <script src="script.js"></script>
 </body>
