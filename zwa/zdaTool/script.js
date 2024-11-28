@@ -2,6 +2,16 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
+const menus = document.querySelectorAll('.customMenu')
+const lanscapeMenu = document.getElementById('landscapeMenu')
+const tabMenu = document.getElementById('tabulkaMenu')
+const atributMenu = document.getElementById('atributMenu')
+
+var CURSOR = {
+    x: 0, y: 0,
+    current: null,
+    row: null
+}
 var SCALE;
 var TABLES = {
     all:[]
@@ -16,7 +26,7 @@ function Scale(){
 }
 function Grid(){
     ctx.fillStyle = 'rgb(60,60,60)'
-    for(let i = 1; i<=100; i++){
+    for(let i = 1; i<= (window.innerWidth > window.innerHeight ? 100 : 50); i++){
         ctx.fillRect(i*SCALE-SCALE/32, 0, SCALE/16, window.innerHeight)
         ctx.fillRect(0, i*SCALE-SCALE/32, window.innerWidth, SCALE/16)
     }
@@ -44,6 +54,17 @@ function appendRow(id, tabulka){
 
     atr.innerText = '#', inp.value = `pole${TABLES[id].next}`, typ.innerText = 'txt'
 
+    row.addEventListener('mousedown', e => {
+        if(e.button == 2){
+            atributMenu.style.top = `${e.clientY-24}px`, atributMenu.style.left = `${e.clientX-8}px`
+
+            CURSOR.row = row.id
+
+            setTimeout(() => {
+                lanscapeMenu.style.top = '110%', tabMenu.style.top = '110%'
+            },0.01)
+        }
+    })
     naz.appendChild(inp)
     row.append(atr, naz, typ)
 
@@ -62,8 +83,7 @@ function appendRow(id, tabulka){
         typ.innerText = dataTypes.all[(dataTypes.all.indexOf(typ.innerText)+1) % dataTypes.all.length]
     })
 }
-function createTable(e){
-    let X = e.clientX, Y = e.clientY
+function createTable(X, Y){
     let id
     do{
         id = Math.floor(Math.random()*1000)
@@ -81,7 +101,6 @@ function createTable(e){
     let h3 = document.createElement('h3')
     h3.innerText = `tabulka-${TABLES.all.length}`
 
-
     tabulka.appendChild(h3)
     appendRow(id, tabulka)
 
@@ -93,22 +112,58 @@ function createTable(e){
             e.clientX - TABLES[id].loc[0],
             e.clientY - TABLES[id].loc[1]
         ]
-    })
-    window.addEventListener('mouseup', () => {
-        TABLES[id].mouse = false
-    })
-    window.addEventListener('mousemove', e => {
-        if(TABLES[id].mouse){
 
-            TABLES[id].loc = [
-                e.clientX - TABLES[id].tolerance[0],
-                e.clientY - TABLES[id].tolerance[1]
-            ]
+        CURSOR.current = id
 
-            tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
+        if(e.button == 2){
+            
+            tabMenu.style.left = `${e.clientX-8}px`, tabMenu.style.top = `${e.clientY-24}px`
+            setTimeout(() => {
+                lanscapeMenu.style.top = '110%'
+            }, 1)
         }
     })
-    tabulka.style.top = `${X}px`, tabulka.style.left = `${Y}px`
+    tabulka.addEventListener('mouseup', () => {
+        try{
+            TABLES[id].mouse = false
+        }catch(error){}
+    })
+    tabulka.addEventListener('mouseleave', () => {
+        try{
+            TABLES[id].mouse = false
+        }catch(error){}
+    })
+    window.addEventListener('mousemove', e => {
+        try{
+            if(TABLES[id].mouse){
+
+                TABLES[id].loc = [
+                    e.clientX - TABLES[id].tolerance[0],
+                    e.clientY - TABLES[id].tolerance[1]
+                ]
+
+                tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
+            }
+        }catch(error){}
+    })
+    
+    tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
+}
+function smazatTabulku(){
+    
+    delete TABLES[CURSOR.current]
+    document.getElementById(CURSOR.current).remove()
+
+    tabMenu.style.top = '110%'
+}
+function pridatAtribut(){
+    
+    appendRow(CURSOR.current, document.getElementById(CURSOR.current))
+}
+function smazatAtribut(){
+
+    document.getElementById(CURSOR.row).remove()
+    atributMenu.style.top = '110%'
 }
 Update()
 window.addEventListener('resize', Update)
@@ -120,9 +175,6 @@ window.addEventListener('contextmenu', e => {
 
     }
 })
-const menus = document.querySelectorAll('.customMenu')
-const lanscapeMenu = document.getElementById('landscapeMenu')
-
 menus.forEach(element => {
     
     element.addEventListener('mouseleave', () => {
@@ -132,7 +184,7 @@ menus.forEach(element => {
 document.getElementById('landscape').addEventListener('mousedown', e => {
 
     if(e.button == 2){
-        lanscapeMenu.style.top = `${e.clientY}px`, lanscapeMenu.style.left = `${e.clientX}px`        
+        lanscapeMenu.style.top = `${e.clientY-24}px`, lanscapeMenu.style.left = `${e.clientX-8}px`        
     }
     console.log('kys')
 })

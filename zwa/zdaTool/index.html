@@ -15,8 +15,17 @@
         </nav>
 
         <ul class="customMenu" id="landscapeMenu">
-            <li onclick="createTable(event)">přidat tabulku</li>
+            <li onclick="createTable(event.clientX, event.clientY)">přidat tabulku</li>
         </ul>
+        <ul class="customMenu" id="tabulkaMenu">
+            <li onclick="pridatAtribut()">přidat atribut</li>
+            <li onclick="smazatTabulku()">odebrat tabulku</li>
+        </ul>
+        <ul class="customMenu" id="atributMenu">
+            <li onclick="smazatAtribut()">odebrat atribut</li>
+        </ul>
+
+        
     </main>
 
     <script src="script.js"></script>

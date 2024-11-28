@@ -16,7 +16,7 @@ main{
 }
 .customMenu{
     position: absolute;
-    top: 10%; left: 10%;
+    top: 110%; left: 10%;
 
     backdrop-filter: blur(2px);
     /* border: 0.1vh solid white; */
@@ -25,6 +25,8 @@ main{
 
     padding: 0.25%;
     color: white;
+
+    user-select: none;
 
     width: auto; height: auto;
     cursor: pointer;
@@ -71,9 +73,11 @@ main{
     border: none;
     border-bottom: 0.1vh solid white;
     height: 100%;
+
 }
 .tabulka nav{
     display: flex;
+    cursor: default;
 }
 .tabulka div{
     padding: 0.3vh; margin: 0.2vh;
@@ -95,15 +99,13 @@ main{
 }
 @media (orientation: portrait){
     .tabulka{
-        width: 17vw;
+        width: 16vw;
     }
     .tabulka div{
         padding: 0.3vw; margin: 0.2vw;
-        border-radius: 5px;
-        cursor: pointer;
     }
     .nazev{
-        width: 10vw;
+        width: 9vw;
     }
     .tabulka input{
         width: 9vw;
