@@ -103,6 +103,7 @@ function createTable(X, Y){
 
     tabulka.appendChild(h3)
     appendRow(id, tabulka)
+    appendRow(id, tabulka)
 
     document.getElementById('landscape').appendChild(tabulka)
     
@@ -188,3 +189,4 @@ document.getElementById('landscape').addEventListener('mousedown', e => {
     }
     console.log('kys')
 })
+createTable()
