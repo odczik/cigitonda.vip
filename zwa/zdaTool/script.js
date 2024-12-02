@@ -37,8 +37,12 @@ function Update(){
 }
 function appendRow(id, tabulka){
 
-    if(TABLES[id].next == undefined) TABLES[id].next = 0
-    else TABLES[id].next++
+    let rowId
+    do{
+        rowId = Math.floor(Math.random()*1000)
+    }while(TABLES[id].rows.includes(rowId))
+
+    TABLES[id].rows.push(rowId)
 
     let row = document.createElement('nav')
     let atr = document.createElement('div'), naz = document.createElement('div'), typ = document.createElement('div')
@@ -46,13 +50,15 @@ function appendRow(id, tabulka){
     inp.type = 'text'
     inp.maxLength = '16'
 
-    row.id = `${id}-${TABLES[id].next}`
-    atr.id = `${id}a`, naz.id = `${id}b`, typ.id = `${id}c`
-    inp.id = `${id}in`
+    row.id = `${rowId}`
+    atr.id = `${rowId}a`, naz.id = `${rowId}b`, typ.id = `${rowId}c`
+    inp.id = `${rowId}in`
 
     atr.classList.add('atribut'), naz.classList.add('nazev'), typ.classList.add('dataTyp')
 
-    atr.innerText = '#', inp.value = `pole${TABLES[id].next}`, typ.innerText = 'txt'
+    atr.innerText = '#', inp.value = `pole${TABLES[id].rows.length}`, typ.innerText = 'txt'
+
+    console.log(TABLES)
 
     row.addEventListener('mousedown', e => {
         if(e.button == 2){
@@ -84,25 +90,31 @@ function appendRow(id, tabulka){
     })
 }
 function createTable(X, Y){
+
     let id
     do{
         id = Math.floor(Math.random()*1000)
     }while(TABLES.all.includes(id))
+
+    //vytvorit prehlohu tabulky
 
     let tabulka = document.createElement('div')
     tabulka.id = id
     tabulka.classList.add('tabulka')
 
     TABLES.all.push(id)
-    TABLES[id] = {}
-    TABLES[id].loc = [X, Y]
-    TABLES[id].mouse = false
+    TABLES[id] = {
+        loc: [X, Y],
+        mouse: false,
+        rows: []
+    }
 
-    let h3 = document.createElement('h3')
-    h3.innerText = `tabulka-${TABLES.all.length}`
+    let head = document.createElement('input')
+    head.value = `tabulka-${TABLES.all.length}`
+    head.id = `${id}h`
+    head.classList.add('tableHeading')
 
-    tabulka.appendChild(h3)
-    appendRow(id, tabulka)
+    tabulka.appendChild(head)
     appendRow(id, tabulka)
 
     document.getElementById('landscape').appendChild(tabulka)
@@ -147,8 +159,35 @@ function createTable(X, Y){
             }
         }catch(error){}
     })
-    
+    window.addEventListener('mouseup', () => {
+        updateSql(id)
+    })
     tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
+
+    //vytvorit nav s sql pro tabulka
+
+    let heading = document.createElement('h3')
+    let container = document.createElement('nav')
+    let sqlCont = document.createElement('nav')
+
+    heading.innerText = 'kys ty mocko'
+
+    heading.id = `${id}-h`
+    sqlCont.id = `${id}-sql`
+    container.id = `${id}-cont`
+    container.classList.add('tableSql')
+
+    container.append(heading, sqlCont)
+    document.getElementById('output').appendChild(container)
+
+    updateSql()
+}
+function updateSql(tableId){
+
+    const heading = document.getElementById(`${tableId}-h`)
+    const sqlCont = document.getElementById(`${tableId}-sql`)
+
+    heading.innerText = document.getElementById(`${tableId}h`).value
 }
 function smazatTabulku(){
     
@@ -170,7 +209,7 @@ Update()
 window.addEventListener('resize', Update)
 
 window.addEventListener('contextmenu', e => {
-    e.preventDefault()
+    e.preventDefault() 
     if(e.button == 2){
 
 
@@ -187,6 +226,6 @@ document.getElementById('landscape').addEventListener('mousedown', e => {
     if(e.button == 2){
         lanscapeMenu.style.top = `${e.clientY-24}px`, lanscapeMenu.style.left = `${e.clientX-8}px`        
     }
-    console.log('kys')
+    // console.log('kys')
 })
-createTable()
+createTable(0,0)
