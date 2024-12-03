@@ -97,7 +97,7 @@ main{
     user-select: none;
 
     border: 0.1vh solid white;
-    width: 16vh;
+    width: 19vh;
 
     color: white;
 
@@ -107,7 +107,7 @@ main{
     box-shadow: 0 0 1vh rgba(255,255,255,0.6);
     border-radius: 5px;
 }
-.tabulka nav input{
+.rowNazev{
     
     font-family: "Roboto", sans-serif;
 
@@ -142,7 +142,7 @@ main{
     border-radius: 5px;
     cursor: pointer;
 }
-.tabulka div:hover{
+.atribut:hover, .dataTyp:hover, .nazev:hover{
     background-color: rgba(255,255,255,0.4);
     transition: 0.1s;
 }
@@ -155,9 +155,22 @@ main{
 .nazev{
     width: 10vh;
 }
+.must{
+    width: 2vh; height: 2vh;
+}
+.must input{
+    width: 1.2vh; height: 1.2vh;
+    position: absolute;
+    background-color: white;
+}
+.must input{
+    position: relative;
+    top: 50%; left: 50%;
+    transform: translate(-70%, -70%);
+}
 @media (orientation: portrait){
     .tabulka{
-        width: 16vw;
+        width: 19vw;
     }
     .tabulka div{
         padding: 0.3vw; margin: 0.2vw;
@@ -165,12 +178,15 @@ main{
     .nazev{
         width: 9vw;
     }
-    .tabulka nav input{
+    .rowNazev{
         width: 9vw;
     }
     .customMenu li{
         padding: 0.5vw;
         margin: 0.2vw;
+    }
+    .atribut, .dataTyp{
+        width: 2vw; height: 2vw;
     }
 }
 @media (max-width: 480px){

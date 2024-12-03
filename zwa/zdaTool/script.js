@@ -16,9 +16,8 @@ var SCALE;
 var TABLES = {
     all:[]
 }
-var dataTypes = {
-    all: ['txt','num','date']
-}
+var dataTypes = ['txt','num','date','auto']
+
 function Scale(){
     canvas.width = window.innerWidth, canvas.height = window.innerHeight
 
@@ -50,15 +49,19 @@ function appendRow(id, tabulka){
     inp.type = 'text'
     inp.maxLength = '16'
 
+    let mst = document.createElement('div'), cbx = document.createElement('input')
+    cbx.type = 'checkbox'
+    mst.appendChild(cbx)
+    
     row.id = `${rowId}`
-    atr.id = `${rowId}a`, naz.id = `${rowId}b`, typ.id = `${rowId}c`
+    atr.id = `${rowId}a`, typ.id = `${rowId}b`
     inp.id = `${rowId}in`
+    cbx.id = `${rowId}c`
 
-    atr.classList.add('atribut'), naz.classList.add('nazev'), typ.classList.add('dataTyp')
+    atr.classList.add('atribut'), naz.classList.add('nazev'), typ.classList.add('dataTyp'), inp.classList.add('rowNazev'), mst.classList.add('must')
 
-    atr.innerText = '#', inp.value = `pole${TABLES[id].rows.length}`, typ.innerText = 'txt'
-
-    console.log(TABLES)
+    atr.innerText = TABLES[id].rows.length == 1 ? '#' : '*'
+    inp.value = `pole${TABLES[id].rows.length}`, typ.innerText = 'txt'
 
     row.addEventListener('mousedown', e => {
         if(e.button == 2){
@@ -72,8 +75,8 @@ function appendRow(id, tabulka){
         }
     })
     naz.appendChild(inp)
-    row.append(atr, naz, typ)
-
+    row.append(atr, naz, typ, mst)
+    
     tabulka.appendChild(row)
     /*
         <nav>
@@ -84,10 +87,21 @@ function appendRow(id, tabulka){
     */
     atr.addEventListener('click', () => {
         atr.innerText = atr.innerText == '#' ? '*' : '#'
+        updateSql(id)
     })
     typ.addEventListener('click', () => {
-        typ.innerText = dataTypes.all[(dataTypes.all.indexOf(typ.innerText)+1) % dataTypes.all.length]
+        typ.innerText = dataTypes[(dataTypes.indexOf(typ.innerText)+1) % dataTypes.length]
+        updateSql(id)
     })
+    inp.addEventListener('input', () => {
+        updateSql(id)
+    })
+    cbx.addEventListener('change', () => {
+        updateSql(id)
+    })
+    try{
+        updateSql(id)
+    }catch(error){}
 }
 function createTable(X, Y){
 
@@ -135,6 +149,8 @@ function createTable(X, Y){
                 lanscapeMenu.style.top = '110%'
             }, 1)
         }
+
+        
     })
     tabulka.addEventListener('mouseup', () => {
         try{
@@ -144,6 +160,11 @@ function createTable(X, Y){
     tabulka.addEventListener('mouseleave', () => {
         try{
             TABLES[id].mouse = false
+        }catch(error){}
+    })
+    head.addEventListener('input', () => {
+        try{
+            updateSql(id)
         }catch(error){}
     })
     window.addEventListener('mousemove', e => {
@@ -157,10 +178,12 @@ function createTable(X, Y){
 
                 tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
             }
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            Update()
+            ctx.fillStyle = 'white'
+            circle(TABLES[id].loc[0], TABLES[id].loc[1], 'white', 'red')
         }catch(error){}
-    })
-    window.addEventListener('mouseup', () => {
-        updateSql(id)
     })
     tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
 
@@ -180,14 +203,69 @@ function createTable(X, Y){
     container.append(heading, sqlCont)
     document.getElementById('output').appendChild(container)
 
-    updateSql()
+    updateSql(id)
+}
+function circle(X, Y, color, strokeColor){
+
+    ctx.save()
+    ctx.translate(X, Y)
+    ctx.lineWidth = 4
+
+    ctx.strokeStyle = strokeColor
+    ctx.fillStyle = color
+    
+    ctx.arc(0, 0, 5, 0, 2*Math.PI)
+
+    ctx.stroke()
+
+    ctx.restore()
 }
 function updateSql(tableId){
+
+    let sql = ''
 
     const heading = document.getElementById(`${tableId}-h`)
     const sqlCont = document.getElementById(`${tableId}-sql`)
 
     heading.innerText = document.getElementById(`${tableId}h`).value
+
+    sql += `create table ${heading.innerText}{\n`
+    
+    for(let id of TABLES[tableId].rows){
+
+        let atr = document.getElementById(`${id}a`)
+        let naz = document.getElementById(`${id}in`)
+        let typ = document.getElementById(`${id}b`)
+        let cbx = document.getElementById(`${id}c`)
+
+        let varType
+        switch(typ.innerText){
+
+            case 'txt':
+                varType = 'varchar(255)'
+                break
+            case 'auto':
+                varType = 'counter(255)'
+                break
+            case 'date':
+                varType = 'date'
+                break
+            case 'num':
+                varType = 'int(255)'
+        }
+
+        sql += `${naz.value} ${varType}`
+        if((cbx).checked) sql += ' not null'
+        if(atr.innerText == '#') sql += ' primary key'
+        sql += ',\n'
+
+        // row.id = `${rowId}`
+        // atr.id = `${rowId}a`, typ.id = `${rowId}bc`
+        // inp.id = `${rowId}in`
+    }
+
+    sql += '};'
+    sqlCont.innerText = sql
 }
 function smazatTabulku(){
     
