@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: black;
+        color: white;
+    }
+    canvas{
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        height: 95vh; width: 47.5vh;
+        
+        border: 0.1vh solid white;
+        border-radius: 1vh;
+        box-shadow: 0 0 2.5vh white;
+
+        background-color: black;
+    }
+    #scoreContainer{
+        position: absolute; 
+        top: 0; left: 0;
+        display: flex;
+    }
+</style>
+<body>
+    
+    <div id="scoreContainer">
+        <div>score: </div>
+        <div id="score">0</div>
+    </div>
+    <canvas id="myCanvas"></canvas>
+
+    <script src="shapes.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
