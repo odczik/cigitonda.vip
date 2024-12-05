@@ -72,3 +72,6 @@ values
 ("Pochcaná sedačka", 80000, "15.02.2024", 17);
 ("Křivý volant", 400, "11.09.2001", 16);
 ("Okurka ve vyfuku", 10000, "28.02.1954", 19);
+
+alter table OPRAVY
+alter column cena currency not null;
