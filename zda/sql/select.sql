@@ -1,0 +1,1 @@
+SELECT Vyrobce, Cena_bez_DPH, Cena_bez_DPH*1.2 as cena FROM Mobily
