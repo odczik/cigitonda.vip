@@ -156,6 +156,11 @@ function createTable(X, Y){
         try{
             TABLES[id].mouse = false
         }catch(error){}
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        Update()
+        ctx.fillStyle = 'white'
+        circle(TABLES[id].loc[0], TABLES[id].loc[1], 'white', 'red')
     })
     tabulka.addEventListener('mouseleave', () => {
         try{
@@ -178,11 +183,6 @@ function createTable(X, Y){
 
                 tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
             }
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height)
-            Update()
-            ctx.fillStyle = 'white'
-            circle(TABLES[id].loc[0], TABLES[id].loc[1], 'white', 'red')
         }catch(error){}
     })
     tabulka.style.top = `${TABLES[id].loc[1]}px`, tabulka.style.left = `${TABLES[id].loc[0]}px`
