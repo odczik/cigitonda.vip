@@ -75,3 +75,11 @@ values
 
 alter table OPRAVY
 alter column cena currency not null;
+
+insert into SPOJENI(idZamestnance, idOpravy)
+values
+(17, 16);
+(19, 22);
+(18, 21);
+(20, 23);
+(16, 29);
