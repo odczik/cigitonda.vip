@@ -14,7 +14,7 @@
     }
     main{
         position: absolute;
-        top: 50%; left: 50%;
+        top: 50%; left: 25%;
         transform: translate(-50%, -50%);
         width: 84vh; height: 84vh;
         border-top: solid 1px white;
@@ -46,8 +46,20 @@
         height: 100%;
         box-shadow: inset 2px 1px 0 white, inset -2px -1px 0 white;
     }
+    #fotoContainer{
+        position: absolute;
+        top: 50%; left: 75%;
+        transform: translateX(-50%);
+        width: 84vh; height: 84vh;
+
+        background-color: rgba(255,255,255,0.4);
+    }
+    #fotoContainer img{
+        width: 12vw; height: 12vw;
+    }
     @media(orientation: portrait){
         main{
+            top: 25%; left: 50%;
             width: 84vw; height: 84vw;
         }
         main nav{
@@ -58,6 +70,12 @@
         }
         .rowContainer{
             width: 72vw;
+        }
+        #fotoContainer{
+            top: 75%; left: 50%;
+            width: 84vw; height: 85.2vw;
+            transform: translate(-50%, -50%);
+            padding: 0; margin: 0;
         }
     }
 </style>
@@ -107,6 +125,74 @@
             <div class="rowContainer"></div>
         </nav>
     </main>
+
+    <div id="fotoContainer">
+        <table id="fotoTable">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
 
 </body>
 </html>
