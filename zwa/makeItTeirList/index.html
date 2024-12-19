@@ -10,13 +10,16 @@
 
     body{
         background-color: black;
+        font-family: "Roboto", sans-serif;
     }
     main{
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
-        width: 80vw; height: 84vh;
-        background-color: rgba(255, 0, 0, 0.25);
+        width: 84vh; height: 84vh;
+        border-top: solid 1px white;
+        border-bottom: solid 1px white;
+        border-left: solid 1px white;
     }
     main nav{
         /* background-color: rgba(0, 255, 0, 0.25); */
@@ -25,44 +28,82 @@
     }
     .tier{
         color: white;
-        background-color: rgba(0, 0, 255, 0.25);
         width: 12vh; height: 12vh;
+        font-size: 1.5em;
+    }
+    .tier div{
+        position: absolute;
+        width: 100%; height: 25%;
+        text-align: center;
+    }
+    .tier div{
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
     }
     .rowContainer{
-        width: 75.4%;
+        width: 72vh;
         height: 100%;
-        background-color: rgb(255, 255, 255, 0.25);
+        box-shadow: inset 2px 1px 0 white, inset -2px -1px 0 white;
+    }
+    @media(orientation: portrait){
+        main{
+            width: 84vw; height: 84vw;
+        }
+        main nav{
+            height: 12vw;
+        }
+        .tier{
+            width: 12vw; height: 12vw;
+        }
+        .rowContainer{
+            width: 72vw;
+        }
     }
 </style>
 <body>
     
     <main>
         <nav>
-            <div class="tier">S</div>
+            <div class="tier" style="background-color: darkred;">
+                <div>S</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
         <nav>
-            <div class="tier">A</div>
+            <div class="tier" style="background-color: rgb(200,200,0);">
+                <div>A</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
         <nav>
-            <div class="tier">B</div>
+            <div class="tier" style="background-color: rgb(200,100,0)">
+                <div>B</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
         <nav>
-            <div class="tier">C</div>
+            <div class="tier" style="background-color: rgb(0,150,0)">
+                <div>C</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
         <nav>
-            <div class="tier">D</div>
+            <div class="tier" style="background-color: rgb(0,120,200)">
+                <div>D</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
         <nav>
-            <div class="tier">E</div>
+            <div class="tier" style="background-color: rgb(200,50,200)">
+                <div>E</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
         <nav>
-            <div class="tier">F</div>
+            <div class="tier" style="background-color: rgb(100,50,150)">
+                <div>F</div>
+            </div>
             <div class="rowContainer"></div>
         </nav>
     </main>
