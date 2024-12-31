@@ -3,196 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lukyho tier list</title>
+    <title>lukiho tier list</title>
 </head>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-
     body{
         background-color: black;
-        font-family: "Roboto", sans-serif;
+        overflow: hidden;
     }
     main{
         position: absolute;
-        top: 50%; left: 25%;
+        top: 50%; left: 50%;
         transform: translate(-50%, -50%);
-        width: 84vh; height: 84vh;
-        border-top: solid 1px white;
-        border-bottom: solid 1px white;
-        border-left: solid 1px white;
+        width: 60vw; height: 80vh;
+        max-width: 60vh; min-width: 40vh;
+
+        border: 0.1vh solid white;
+        /* padding: 5%; */
     }
-    main nav{
-        /* background-color: rgba(0, 255, 0, 0.25); */
-        height: 12vh;
-        display: flex;
+    #nn{
+        position: absolute;
+        top: 100%; left: 0;
+        width: 100vw; height: 100vh;
+        background-color: black;
     }
-    .tier{
+    #nn div{
+        position: relative;
+    }
+    #nn div{
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        text-align: center;
         color: white;
-        width: 12vh; height: 12vh;
-        font-size: 1.5em;
+        font-size: 1.2em;
+    }
+    #tierListContainer{
+        background-color: rgba(255,0,0,0.25);
+    }
+    #tierListContainer nav{
+        height: 6vh;
+        display: flex;
+        border-bottom: 0.1vh solid white;
+    }
+    #picContainer img{
+        width: 12.5%;
+        cursor: pointer;
+    }
+    #inCont{
+        position: absolute;
+        display: flex;
+        
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 0.8em;
+
+        color: white;
+    } 
+    .tier{
+        background-color: rgba(0,0,255,0.25);
+        width: 6vh; height: 100%;
+        min-width: 6vh;
+        color: white;
     }
     .tier div{
         position: absolute;
-        width: 100%; height: 25%;
-        text-align: center;
     }
     .tier div{
         position: relative;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 50%; transform: translateY(-50%);
+        text-align: center;
     }
-    .rowContainer{
-        width: 72vh;
-        height: 100%;
-        box-shadow: inset 2px 1px 0 white, inset -2px -1px 0 white;
-    }
-    #fotoContainer{
-        position: absolute;
-        top: 50%; left: 75%;
-        transform: translateX(-50%);
-        width: 84vh; height: 84vh;
-
+    .tierContainer{
         background-color: rgba(255,255,255,0.4);
+        width: 100%; height: 100%;
     }
-    #fotoContainer img{
-        width: 12vw; height: 12vw;
-    }
-    @media(orientation: portrait){
-        main{
-            top: 25%; left: 50%;
-            width: 84vw; height: 84vw;
-        }
-        main nav{
-            height: 12vw;
-        }
-        .tier{
-            width: 12vw; height: 12vw;
-        }
-        .rowContainer{
-            width: 72vw;
-        }
-        #fotoContainer{
-            top: 75%; left: 50%;
-            width: 84vw; height: 85.2vw;
-            transform: translate(-50%, -50%);
-            padding: 0; margin: 0;
+    @media(max-width: 500px){
+        #nn{
+            z-index: 999;
+            top: 0;
         }
     }
 </style>
 <body>
     
-    <main>
-        <nav>
-            <div class="tier" style="background-color: darkred;">
-                <div>S</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-        <nav>
-            <div class="tier" style="background-color: rgb(200,200,0);">
-                <div>A</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-        <nav>
-            <div class="tier" style="background-color: rgb(200,100,0)">
-                <div>B</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-        <nav>
-            <div class="tier" style="background-color: rgb(0,150,0)">
-                <div>C</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-        <nav>
-            <div class="tier" style="background-color: rgb(0,120,200)">
-                <div>D</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-        <nav>
-            <div class="tier" style="background-color: rgb(200,50,200)">
-                <div>E</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-        <nav>
-            <div class="tier" style="background-color: rgb(100,50,150)">
-                <div>F</div>
-            </div>
-            <div class="rowContainer"></div>
-        </nav>
-    </main>
-
-    <div id="fotoContainer">
-        <table id="fotoTable">
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-        </table>
+    <div id="nn">
+        <div>
+            rozliseni neni podporovano
+        </div>
     </div>
+
+    <div id="inCont">
+        <input type="file" id="imgInput" webkitdirectory multiple accept="image/*" />
+        <div id="fileInputInfo">< nahraj slozku s obrazky</div>
+    </div>
+
+    <main>
+        <div id="tierListContainer">
+            <nav id="S">
+                <div class="tier" style="background-color: rgb(150,0,0);">
+                    <div>S</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+            <nav id="A">
+                <div class="tier" style="background-color: rgb(180,160,0);">
+                    <div>A</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+            <nav id="B">
+                <div class="tier" style="background-color: rgb(200,100,0);">
+                    <div>B</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+            <nav id="C">
+                <div class="tier" style="background-color: rgb(0,180,50);">
+                    <div>C</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+            <nav id="D">
+                <div class="tier" style="background-color: rgb(0,120,200);">
+                    <div>D</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+            <nav id="E">
+                <div class="tier" style="background-color: rgb(180,0,180);">
+                    <div>E</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+            <nav id="F">
+                <div class="tier" style="background-color: rgb(80,0,80);">
+                    <div>F</div>
+                </div>
+                <div class="tierContainer"></div>
+            </nav>
+        </div>
+        <div id="picContainer">
+            
+        </div>
+    </main>
 
 </body>
 </html>
