@@ -12,7 +12,14 @@ imgInput.addEventListener('change', () => {
 
     Array.from(files).forEach(item => {
         if(item.type.startsWith('image/')){
-            
+            const reader = new FileReader();
+
+            reader.onload = function(e){
+                const img = document.createElement('img')
+                img.src = e.target.result
+                imgContainer.appendChild(img)
+            }
+            reader.readAsDataURL(item);
         }
     })
 })
