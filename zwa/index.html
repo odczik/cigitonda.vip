@@ -3,58 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Upload and Display Folder of Images</title>
-  <style>
-    #preview-container {
-      margin-top: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      border: 2px dashed #ccc;
-      padding: 10px;
-    }
-
-    #preview-container img {
-      max-width: 150px;
-      max-height: 150px;
-      object-fit: cover;
-      border: 1px solid #ddd;
-    }
-  </style>
+  <title>Document</title>
 </head>
 <body>
-  <h1>Upload a Folder of Images</h1>
-  <input type="file" id="folderInput" webkitdirectory multiple accept="image/*" />
-  <div id="preview-container">No images uploaded</div>
-
+  
   <script>
-    // JavaScript to handle folder upload and display images
-    const folderInput = document.getElementById('folderInput');
-    const previewContainer = document.getElementById('preview-container');
+    let str = 'img0'
 
-    folderInput.addEventListener('change', () => {
-      const files = folderInput.files;
-      previewContainer.innerHTML = ''; // Clear any previous content
-
-      if (files.length === 0) {
-        previewContainer.textContent = 'No images uploaded';
-        return;
-      }
-
-      Array.from(files).forEach((file) => {
-        if (file.type.startsWith('image/')) {
-          const reader = new FileReader();
-
-          reader.onload = function (event) {
-            const img = document.createElement('img');
-            img.src = event.target.result;
-            previewContainer.appendChild(img);
-          };
-
-          reader.readAsDataURL(file); // Read image file as data URL
-        }
-      });
-    });
+    console.log(str.substring(3))
   </script>
 </body>
 </html>

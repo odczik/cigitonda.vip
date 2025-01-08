@@ -63,6 +63,16 @@
 
         color: white;
     } 
+    #cursorCont{
+        position: absolute;
+        top: -100%; left: 0;
+        transform: translate(-50%, -50%);
+        width: 7.5vw; height: 7.5vw;
+        z-index: 999
+    }
+    #cursorImg{
+        width: 100%; height: 100%;
+    }
     .tier{
         /* background-color: rgba(0,0,255,0.25); */
         width: 7.5vw; height: 100%;
@@ -94,12 +104,12 @@
         #tierListContainer nav{
             height: 7.5vh;
         }
+        #cursorCont{
+            width: 7.5vh; height: 7.5vh;
+        }
         .tier{
             width: 7.5vh;
             min-width: 7.5vh;
-        }
-        body{
-            background-color: red;
         }
     }
     @media(max-width: 66.6vh){
@@ -109,12 +119,12 @@
         #tierListContainer nav{
             height: 5vh;
         }
+        #cursorCont{
+            width: 5vh; height: 5vh;
+        }
         .tier{
             width: 5vh;
             min-width: 5vh;
-        }
-        body{
-            background-color: aqua;
         }
     }
 </style>
@@ -129,6 +139,10 @@
     <div id="inCont">
         <input type="file" id="imgInput" webkitdirectory multiple accept="image/*" />
         <div id="fileInputInfo">< nahraj slozku s obrazky</div>
+    </div>
+
+    <div id="cursorCont">
+        <img id="cursorImg" src="assets/bnd2.png">
     </div>
 
     <main>
