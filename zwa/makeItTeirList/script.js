@@ -4,7 +4,7 @@ const cursorImg = document.getElementById('cursorImg'), cursorCont = document.ge
 const directory = document.getElementById('directory')
 
 var PICS = {
-    len: 3,
+    len: 0,
     dirList: [],
 }
 var CURSOR = {
@@ -87,6 +87,7 @@ directory.addEventListener('change', () =>{
     console.log(directory.value)
     imgContainer.innerHTML = ''
 
+    PICS.len = 0
     let counter = 0
     for(let i = 0; i<DIRS[directory.value]; i++){
 
@@ -119,14 +120,12 @@ directory.addEventListener('change', () =>{
     }
 
 })
-uploudFromAssets()
 window.addEventListener('mousedown', e => {
    
     if(CURSOR.mouseOver != ''){
         CURSOR.hold = CURSOR.mouseOver
 
         cursorImg.src = PICS.dirList[CURSOR.hold.substring(3)]
-        console.log(cursorImg.src)
 
         cursorCont.style.left = `${e.clientX}px`, cursorCont.style.top = `${e.clientY}px`
     }
