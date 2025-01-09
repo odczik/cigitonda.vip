@@ -1,6 +1,7 @@
 const imgInput = document.getElementById('imgInput'), imgContainer = document.getElementById('picContainer')
 const fileInputInfo = document.getElementById('fileInputInfo')
 const cursorImg = document.getElementById('cursorImg'), cursorCont = document.getElementById('cursorCont')
+const directory = document.getElementById('directory')
 
 var PICS = {
     len: 3,
@@ -78,32 +79,46 @@ imgInput.addEventListener('change', () => {
         }
     })
 })
-function uploudFromAssets(){
-
-    for(let i = 0; i<14; i++){
-
-        const img = document.createElement('img')
-        img.src = `assets/kocky/cat${i}.png`
-
-        img.id = `img${PICS.len}`
-        
-        PICS.len++
-        PICS.dirList.push(img.src)
-
-        imgContainer.appendChild(img)
-        
-        img.addEventListener('mousedown', e => {
-            e.preventDefault()
-        })
-        img.addEventListener('mouseover', () => {
-            CURSOR.mouseOver = img.id
-            console.log(img.id)
-        })
-        img.addEventListener('mouseleave', () => {
-            CURSOR.mouseOver = ''
-        })
-    }
+const DIRS = {
+    'assets/kocky/': 14,
+    'assets/trida/': 9
 }
+directory.addEventListener('change', () =>{
+    console.log(directory.value)
+    imgContainer.innerHTML = ''
+
+    let counter = 0
+    for(let i = 0; i<DIRS[directory.value]; i++){
+
+        try{
+            const img = document.createElement('img')
+            img.src = `${directory.value}${counter}.png`
+
+            img.id = `img${PICS.len}`
+            
+            PICS.len++
+            PICS.dirList.push(img.src)
+
+            imgContainer.appendChild(img)
+            
+            img.addEventListener('mousedown', e => {
+                e.preventDefault()
+            })
+            img.addEventListener('mouseover', () => {
+                CURSOR.mouseOver = img.id
+                console.log(img.id)
+            })
+            img.addEventListener('mouseleave', () => {
+                CURSOR.mouseOver = ''
+            })
+        }catch(error){
+            console.log('kys')
+        }
+
+        counter++
+    }
+
+})
 uploudFromAssets()
 window.addEventListener('mousedown', e => {
    

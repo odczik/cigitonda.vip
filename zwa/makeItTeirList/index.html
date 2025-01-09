@@ -52,6 +52,7 @@
     #picContainer img{
         width: 7.5vw; height: 7.5vw;
         cursor: pointer;
+        padding: 0; margin: 0;
     }
     #picContainer{
         width: 100%; height: 30%;
@@ -59,7 +60,6 @@
     }
     #inCont{
         position: absolute;
-        display: flex;
         
         font-family: Arial, Helvetica, sans-serif;
         font-size: 0.8em;
@@ -151,7 +151,14 @@
 
     <div id="inCont">
         <input type="file" id="imgInput" webkitdirectory multiple accept="image/*" />
-        <div id="fileInputInfo">< nahraj slozku s obrazky</div>
+        <div id="fileInputInfo">^ nahraj slozku s obrazky</div>
+        <br><br>
+        <select id="directory" value="vlastní">
+            <option value="">vlastní</option>
+            <option value="assets/kocky/">kocky</option>
+            <option value="assets/trida/">I2A</option>
+        </select>
+        <div>^ nebo vyber z moznosti</div>
     </div>
 
     <div id="cursorCont">
@@ -164,7 +171,6 @@
                 <div class="tier" style="background-color: rgb(150,0,0);">
                     <div>S</div>
                 </div>
-                <img src="assets/kocky/cat0.png">
             </nav>
             <nav id="A">
                 <div class="tier" style="background-color: rgb(180,160,0);">
