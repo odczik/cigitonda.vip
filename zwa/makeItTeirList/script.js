@@ -81,7 +81,7 @@ imgInput.addEventListener('change', () => {
 })
 const DIRS = {
     'assets/kocky/': 14,
-    'assets/trida/': 9
+    'assets/trida/': 21
 }
 directory.addEventListener('change', () =>{
     console.log(directory.value)
