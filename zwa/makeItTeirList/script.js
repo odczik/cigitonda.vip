@@ -81,7 +81,8 @@ imgInput.addEventListener('change', () => {
 })
 const DIRS = {
     'assets/kocky/': 14,
-    'assets/trida/': 21
+    'assets/trida/': 21,
+    'assets/ucitele/': 3
 }
 directory.addEventListener('change', () =>{
     console.log(directory.value)
@@ -194,32 +195,3 @@ window.addEventListener('mousemove', e => {
         }
     }
 })
-/*
-for(let i of tiers){
-
-    let tierRow = document.getElementById(i)
-
-    tierRow.addEventListener('mouseover', () => {
-        
-        CURSOR.mouseOver = i
-        if(CURSOR.hold != false){
-
-            let placeHolderImg = document.createElement('img')
-            placeHolderImg.src = CURSOR.hold
-            placeHolderImg.id = 'placeHolderImg'
-            placeHolderImg.style.opacity = '0.5'
-
-            document.getElementById(i).appendChild(placeHolderImg)
-        }
-        console.log(i)
-    })
-    tierRow.addEventListener('mouseleave', () => {
-
-        CURSOR.mouseOver = ''
-
-        try{
-            delete document.getElementById('placeHolderImg')
-        }catch(error){}
-    })
-}
-*/
