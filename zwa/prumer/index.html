@@ -7,40 +7,102 @@
 </head>
 <style>
     main{
-        background-color: rgba(255,0,0,0.5);
+        position: absolute;
+        top: 0; left: 50%;
+        transform: translateX(-50%);
+
+        background-color: rgba(255,0,0,0.2);
         height: 100vh; width: 50vw;
-        
+    }
+    #nadpis{
         display: flex;
+        background-color: rgba(0,255,0,0.2);
+        width: 100%;
+        height: 5vh;
+    }
+    #nadpis div{
+        width: 50%;
+        text-align: center;
+    }
+    .line{
+        width: 100%;
+        background-color: rgba(0,0,255,0.2);
+    }
+    .znamkyIn, .vahyIn{
+        position: absolute;
+    }
+    .znamkyIn{
+        position: relative;
+        left: 25%;
+        transform: translateX(-50%);
+    }
+    .vahyIn{
+        left: 75%;
+        transform: translateX(-50%);
     }
 </style>
 <body>
     
-    <main onclick="addLine()">
-        <div id="znamky">
-            <div>znamka</div>
-            <input type="number" id="znamka0">
-        </div>
-        <div id="vaha">
+    <main>
+        <div id="nadpis">
+            <div>znamky</div>
             <div>vaha</div>
-            <input type="number" id="vaha0">
+        </div>
+        <div id="inputCont">
+
+            <div class="line" id="cont0">
+                <input class="znamkyIn" id="znamka0" type="number">
+                <input class="vahyIn" id="vaha0" type="number">
+            </div>
         </div>
     </main>
 
     <script>
 
-        const znamkyC = document.getElementById('zmanky'), vahaC = document.getElementById
-        var znamkyArr = [], vahaArr = []
+        const container = document.getElementById('inputCont')
+        
+        var ZNAMKY = {
+            all: ['znamka0'],
+            allVahy: ['vaha0'],
+            
+            valueZnamek: 
+        }
+
+        document.getElementById('znamka0').focus()
 
         function addLine(){
 
+            let id = ZNAMKY.all.length
             let znamkaIn = document.createElement('input')
             let vahaIn = document.createElement('input')
 
+            znamkaIn.id = `znamka${id}`
+            vahaIn.id = `vaha${id}`
+
+            znamkaIn.classList.add('znamkyIn')
+            vahaIn.classList.add('vahyIn')
+
             znamkaIn.type = 'number', vahaIn.type = 'number'
 
-            znamkyC.appendChild(znamkaIn), vahaC.appendChild(vahaIn)
-        }
 
+            let lineCont = document.createElement('div')
+            lineCont.classList.add('line')
+            
+            lineCont.append(znamkaIn, vahaIn)
+        
+            container.appendChild(lineCont)
+
+            
+            znamkaIn.addEventListener('change', () => {
+                vahaIn.focus()
+            })
+            vahaIn.addEventListener('change', () => {
+                try{
+                    document.getElementById(`znamka${id}`)
+                }catch(error){}
+            })
+        }
+        addLine()
     </script>
 </body>
 </html>
