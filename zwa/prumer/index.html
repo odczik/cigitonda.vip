@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    main{
+        background-color: rgba(255,0,0,0.5);
+        height: 100vh; width: 50vw;
+        
+        display: flex;
+    }
+</style>
+<body>
+    
+    <main onclick="addLine()">
+        <div id="znamky">
+            <div>znamka</div>
+            <input type="number" id="znamka0">
+        </div>
+        <div id="vaha">
+            <div>vaha</div>
+            <input type="number" id="vaha0">
+        </div>
+    </main>
+
+    <script>
+
+        const znamkyC = document.getElementById('zmanky'), vahaC = document.getElementById
+        var znamkyArr = [], vahaArr = []
+
+        function addLine(){
+
+            let znamkaIn = document.createElement('input')
+            let vahaIn = document.createElement('input')
+
+            znamkaIn.type = 'number', vahaIn.type = 'number'
+
+            znamkyC.appendChild(znamkaIn), vahaC.appendChild(vahaIn)
+        }
+
+    </script>
+</body>
+</html>
