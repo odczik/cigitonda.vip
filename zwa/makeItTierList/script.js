@@ -85,7 +85,6 @@ const DIRS = {
 }
 directory.addEventListener('change', () =>{
     imgContainer.innerHTML = ''
-    document.querySelectorAll()
 
     PICS.len = 0
     let counter = 0
