@@ -42,7 +42,8 @@
     }
 </style>
 <body>
-    
+    <input type="button" onclick="addLine()" value="pridat radek">
+    <input type="button" onclick="removeLine()" value="odebrat radek">
     <main>
         <div id="nadpis">
             <div>znamky</div>
@@ -65,7 +66,6 @@
             all: ['znamka0'],
             allVahy: ['vaha0'],
             
-            valueZnamek: 
         }
 
         document.getElementById('znamka0').focus()
@@ -86,6 +86,7 @@
 
 
             let lineCont = document.createElement('div')
+            lineCont.id = `cont${id}`
             lineCont.classList.add('line')
             
             lineCont.append(znamkaIn, vahaIn)
@@ -101,6 +102,13 @@
                     document.getElementById(`znamka${id}`)
                 }catch(error){}
             })
+        }
+        function removeLine(){
+
+            console.log(`cont${ZNAMKY.all.length}`)
+            let elem = document.getElementById(`cont${ZNAMKY.all.length}`)
+
+            elem.remove()
         }
         addLine()
     </script>
