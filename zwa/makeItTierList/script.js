@@ -23,6 +23,7 @@ function transferImg(desContId, imgId){ // destination container
     desImg.src = srcImg.src
     srcImg.remove()
     desImg.id = imgId
+    desImg.classList.add('allImgs')
 
     document.getElementById(desContId).appendChild(desImg)
 
@@ -37,10 +38,16 @@ function transferImg(desContId, imgId){ // destination container
         CURSOR.mouseOver = ''
     })
 }
+function clearTable(){
+    const allImgs = document.querySelectorAll('.allImgs')
 
+    allImgs.forEach(img => {
+        img.remove()
+    })
+}
 imgInput.addEventListener('change', () => {
+    clearTable()
     const files = imgInput.files
-    imgContainer.innerHTML = ''
 
     if(files.length == 0){
         fileInputInfo.innerText('zdane obrazky nebyly nahrany')
@@ -58,6 +65,7 @@ imgInput.addEventListener('change', () => {
                 img.src = e.target.result
       
                 img.id = `img${PICS.len}`
+                img.classList.add('allImgs')
                 
                 PICS.len++
                 PICS.dirList.push(img.src)
@@ -84,7 +92,7 @@ const DIRS = {
     'assets/trida/': 21
 }
 directory.addEventListener('change', () =>{
-    imgContainer.innerHTML = ''
+    clearTable()
 
     PICS.len = 0
     let counter = 0
@@ -95,6 +103,7 @@ directory.addEventListener('change', () =>{
             img.src = `${directory.value}${counter}.png`
 
             img.id = `img${PICS.len}`
+            img.classList.add('allImgs')
             
             PICS.len++
             PICS.dirList.push(img.src)
