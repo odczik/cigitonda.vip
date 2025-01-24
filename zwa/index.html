@@ -3,84 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Drag Image with Cursor</title>
-  <style>
-    #container {
-      width: 500px;
-      height: 300px;
-      border: 1vh solid black;
-      position: relative;
-      margin: 50px auto;
-    }
-    #image {
-      width: 100px;
-      height: 100px;
-      position: absolute;
-      cursor: grab;
-    }
-    #image.dragging {
-      cursor: grabbing;
-    }
-  </style>
+  <title>Document</title>
 </head>
 <body>
-  <div id="container"></div>
-  <img id="image" src="https://via.placeholder.com/100" alt="Draggable Image">
-
+  
   <script>
-    const image = document.getElementById("image");
-    const container = document.getElementById("container");
 
-    let isDragging = false;
+    let str = 'kysTyPizdo'
+    console.log(str[5] + str[6])
 
-    // Mouse down: Start dragging
-    image.addEventListener("mousedown", (event) => {
-      isDragging = true;
-      image.classList.add("dragging");
-
-      // Offset to ensure cursor stays centered
-      const offsetX = event.clientX - image.offsetLeft;
-      const offsetY = event.clientY - image.offsetTop;
-
-      // Mouse move: Move the image
-      const onMouseMove = (e) => {
-        if (isDragging) {
-          const x = e.clientX - offsetX;
-          const y = e.clientY - offsetY;
-
-          // Update image position
-          image.style.left = `${x}px`;
-          image.style.top = `${y}px`;
-
-          // Check if the cursor is over the container
-          const containerRect = container.getBoundingClientRect();
-          const isOverContainer =
-            e.clientX >= containerRect.left &&
-            e.clientX <= containerRect.right &&
-            e.clientY >= containerRect.top &&
-            e.clientY <= containerRect.bottom;
-
-          if (isOverContainer) {
-            container.style.borderColor = "green"; // Highlight container
-          } else {
-            container.style.borderColor = "#333"; // Reset border
-          }
-        }
-      };
-
-      // Mouse up: Stop dragging
-      const onMouseUp = () => {
-        isDragging = false;
-        image.classList.remove("dragging");
-        container.style.borderColor = "#333"; // Reset border color
-        document.removeEventListener("mousemove", onMouseMove);
-        document.removeEventListener("mouseup", onMouseUp);
-      };
-
-      // Attach mousemove and mouseup events
-      document.addEventListener("mousemove", onMouseMove);
-      document.addEventListener("mouseup", onMouseUp);
-    });
   </script>
 </body>
 </html>

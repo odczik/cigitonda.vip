@@ -32,7 +32,7 @@ function transferImg(desContId, imgId){ // destination container
     })
     desImg.addEventListener('mouseover', () => {
         CURSOR.mouseOver = desImg.id
-        console.log(desImg.id)
+        // console.log(desImg.id)
     })
     desImg.addEventListener('mouseleave', () => {
         CURSOR.mouseOver = ''
@@ -44,6 +44,17 @@ function clearTable(){
     allImgs.forEach(img => {
         img.remove()
     })
+}
+function countImgs(tierId){
+
+    const tier = document.getElementById(tierId)
+    let counter = 0
+
+    for(let i = 0; i < tier.innerHTML.length; i++){
+
+        if((tier.innerHTML[i] + tier.innerHTML[i+1] + tier.innerHTML[i+2] + tier.innerHTML[i+3]) == '<img') counter++
+    }
+    return counter
 }
 imgInput.addEventListener('change', () => {
     clearTable()
@@ -89,7 +100,8 @@ imgInput.addEventListener('change', () => {
 })
 const DIRS = {
     'assets/kocky/': 14,
-    'assets/trida/': 21
+    'assets/trida/': 21,
+    'assets/starwars/': 47
 }
 directory.addEventListener('change', () =>{
     clearTable()
@@ -115,7 +127,7 @@ directory.addEventListener('change', () =>{
             })
             img.addEventListener('mouseover', () => {
                 CURSOR.mouseOver = img.id
-                console.log(img.id)
+                // console.log(img.id)
             })
             img.addEventListener('mouseleave', () => {
                 CURSOR.mouseOver = ''
@@ -191,7 +203,7 @@ window.addEventListener('mousemove', e => {
                     document.getElementById(i).appendChild(showcaseImg)
 
                 }else{
-                    console.log('kys')
+                    // console.log('kys')
                 }
             }else{
 
@@ -202,32 +214,10 @@ window.addEventListener('mousemove', e => {
         }
     }
 })
-/*
-for(let i of tiers){
+window.addEventListener('keypress', e => {
 
-    let tierRow = document.getElementById(i)
-
-    tierRow.addEventListener('mouseover', () => {
-        
-        CURSOR.mouseOver = i
-        if(CURSOR.hold != false){
-
-            let placeHolderImg = document.createElement('img')
-            placeHolderImg.src = CURSOR.hold
-            placeHolderImg.id = 'placeHolderImg'
-            placeHolderImg.style.opacity = '0.5'
-
-            document.getElementById(i).appendChild(placeHolderImg)
-        }
-        console.log(i)
-    })
-    tierRow.addEventListener('mouseleave', () => {
-
-        CURSOR.mouseOver = ''
-
-        try{
-            delete document.getElementById('placeHolderImg')
-        }catch(error){}
-    })
-}
-*/
+    console.log(document.getElementById('S').innerHTML)
+    let timer = performance.now()
+    console.log(countImgs('S'))
+    console.log(performance.now() - timer)
+})
