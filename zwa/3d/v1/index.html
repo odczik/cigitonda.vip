@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>3D Space with Three.js</title>
+  <title>3D V1</title>
 </head>
 <style>
     canvas{
@@ -13,50 +13,11 @@
 
         border: 5px solid rgba(80,80,80);
         display: block;
+        padding: 0; margin: 0;
     }
 </style>
 <body>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script>
-        // Scene, Camera, Renderer
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
-
-        // Create a Cube
-        const geometry = new THREE.BoxGeometry();
-        const material = new THREE.MeshBasicMaterial({color: 'rgb(255,0,0)'})
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
-
-        // Camera Position
-        camera.position.z = 10;
-
-        // Animation Loop
-        function animate() {
-            requestAnimationFrame(animate)
-            cube.rotation.x += 0.01
-            cube.rotation.y += 0.01
-            renderer.render(scene, camera)
-        }
-        animate();
-
-        function resizeScene(){
-            let width = 0, height = 0;
-            if(window.innerWidth > window.innerHeight){
-                width = window.innerHeight, height = window.innerHeight
-            }else{
-                width = window.innerWidth, height = window.innerWidth
-            }
-            
-            renderer.setSize(width, height)
-            camera.aspect = 1
-            camera.updateProjectionMatrix()
-        }
-        resizeScene()
-        window.addEventListener('resize', resizeScene)
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
