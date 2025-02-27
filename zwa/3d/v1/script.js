@@ -18,6 +18,7 @@ document.body.appendChild(renderer.domElement)
 const geometry = new THREE.BoxGeometry()
 const material = new THREE.MeshBasicMaterial({color: 'rgb(255,0,0)'})
 const cube = new THREE.Mesh(geometry, material)
+console.log(cube)
 scene.add(cube)
 
 // Camera Position
@@ -25,27 +26,20 @@ camera.position.z = 10
 
 //guide lines
 const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(255,255,255)'})
-const POINTS = [[], [], []]
-
 for(let i = -10; i<10; i++){
+    const POINTS = [[], [], []]
 
-    POINTS[0].push(new THREE.Vector3(-100 + i*10, 0, 0))
-    POINTS[0].push(new THREE.Vector3(100 - i*10, 0, 0))
-    POINTS[1].push(new THREE.Vector3(i*10, -100, 0))
-    POINTS[1].push(new THREE.Vector3(i*10, 100, 0))
-    POINTS[2].push(new THREE.Vector3(i*10, 0, -100))
-    POINTS[2].push(new THREE.Vector3(i*10, 0, 100))
+    POINTS[0].push(new THREE.Vector3(-100, i*10, 0))
+    POINTS[0].push(new THREE.Vector3(100, i*10, 0))
 
     const xLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[0])
-    const yLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[1])
-    const zLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[2])
     
     const xLine = new THREE.Line(xLineGeometry, lineMaterial)
-    const yLine = new THREE.Line(yLineGeometry, lineMaterial)
-    const zLine = new THREE.Line(zLineGeometry, lineMaterial)
 
-    scene.add(xLine, yLine, zLine)
+    scene.add(xLine)
 }
+
+
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate)
