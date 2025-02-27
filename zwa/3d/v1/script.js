@@ -6,7 +6,6 @@
 /** @type {import('three').MeshBasicMaterial} */
 /** @type {import('three').Mesh} */
 //====================================================================================================
-import * as THREE from 'three'
 
 // Scene, Camera, Renderer
 const scene = new THREE.Scene()
@@ -28,20 +27,35 @@ camera.position.z = 10
 //guide lines
 const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(100,100,100)'})
 for(let i = -10; i<10; i++){
-    const POINTS = [[], [], []]
+    const POINTS = [[], [], [], []]
 
     POINTS[0].push(new THREE.Vector3(-100, i*10, 0))
     POINTS[0].push(new THREE.Vector3(100, i*10, 0))
     POINTS[1].push(new THREE.Vector3(i*10, 100, 0))
-    POINTS[1].push(new THREE.Vector3(i*10, 100, 0))
+    POINTS[1].push(new THREE.Vector3(i*10, -100, 0))
+    POINTS[2].push(new THREE.Vector3(100, 0, i*10))
+    POINTS[2].push(new THREE.Vector3(-100, 0, i*10))
+    POINTS[3].push(new THREE.Vector3(i*10, 0, -100))
+    POINTS[3].push(new THREE.Vector3(i*10, 0, 100))
 
+    for(j of POINTS){
+        const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
+
+        const line = new THREE.Line(lineGeometry, lineMaterial)
+        scene.add(line)
+    }
+    /*
     const xLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[0])
     const yLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[1])
-    
+    const zLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[2])
+    const
+
     const xLine = new THREE.Line(xLineGeometry, lineMaterial)
     const yLine = new THREE.Line(yLineGeometry, lineMaterial)
+    const zLine = new THREE.Line(zLineGeometry, lineMaterial)
 
-    scene.add(xLine, yLine)
+    scene.add(xLine, yLine, zLine)
+    */
 }
 
 // Animation Loop
@@ -121,7 +135,7 @@ window.addEventListener('mouseup', e => {
     CURSOR.down = false
 
     USER.rotation.y += getAngle(CURSOR.startX - e.clientX, 250)
-    USER.rotation.x += getAngle(CURSOR.startY - e.clientY, 250)
+    USER.rotation.z += getAngle(CURSOR.startY - e.clientY, 250)
 })
 //pohyb a orientace kamery
 window.addEventListener('mousemove', e => {
