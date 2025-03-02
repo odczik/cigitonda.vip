@@ -14,6 +14,13 @@ const renderer = new THREE.WebGLRenderer()
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
+const cameraParent = new THREE.Object3D();
+cameraParent.add(camera); // Add the camera to the parent
+scene.add(cameraParent); // Add the parent to the scene
+
+cameraParent.position.z = 10
+
+
 // Create a Cube
 const geometry = new THREE.BoxGeometry()
 const material = new THREE.MeshBasicMaterial({color: 'rgb(255,0,0)'})
@@ -23,36 +30,38 @@ scene.add(cube)
 
 // Camera Position
 
-//guide lines
-const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(255,255,255)'})
-for(let s = 0; s<2; s++)
-    for(let i = 0; i<=20; i++){
-        const POINTS = [[], [], [], [], [], []]
+const drawGuideLines = () => {
+    //guide lines
+    const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(255,255,255)'})
+    for(let s = 0; s<2; s++)
+        for(let i = 0; i<=20; i++){
+            const POINTS = [[], [], [], [], [], []]
 
-        POINTS[0].push(new THREE.Vector3(-100, -100+i*10, -100+200*s))
-        POINTS[0].push(new THREE.Vector3(100, -100+i*10, -100+200*s))
-        POINTS[1].push(new THREE.Vector3(-100+i*10, -100, -100+200*s))
-        POINTS[1].push(new THREE.Vector3(-100+i*10, 100, -100+200*s))        
+            POINTS[0].push(new THREE.Vector3(-100, -100+i*10, -100+200*s))
+            POINTS[0].push(new THREE.Vector3(100, -100+i*10, -100+200*s))
+            POINTS[1].push(new THREE.Vector3(-100+i*10, -100, -100+200*s))
+            POINTS[1].push(new THREE.Vector3(-100+i*10, 100, -100+200*s))        
 
-        POINTS[2].push(new THREE.Vector3(-100+200*s, -100+i*10, -100))
-        POINTS[2].push(new THREE.Vector3(-100+200*s, -100+i*10, 100))
-        POINTS[3].push(new THREE.Vector3(-100+200*s, -100, -100+i*10))
-        POINTS[3].push(new THREE.Vector3(-100+200*s, 100, -100+i*10))
+            POINTS[2].push(new THREE.Vector3(-100+200*s, -100+i*10, -100))
+            POINTS[2].push(new THREE.Vector3(-100+200*s, -100+i*10, 100))
+            POINTS[3].push(new THREE.Vector3(-100+200*s, -100, -100+i*10))
+            POINTS[3].push(new THREE.Vector3(-100+200*s, 100, -100+i*10))
 
-        POINTS[4].push(new THREE.Vector3(-100+i*10, -100+200*s, -100))
-        POINTS[4].push(new THREE.Vector3(-100+i*10, -100+200*s, 100))
-        POINTS[5].push(new THREE.Vector3(-100, -100+200*s, -100+i*10))
-        POINTS[5].push(new THREE.Vector3(100, -100+200*s, -100+i*10))
+            POINTS[4].push(new THREE.Vector3(-100+i*10, -100+200*s, -100))
+            POINTS[4].push(new THREE.Vector3(-100+i*10, -100+200*s, 100))
+            POINTS[5].push(new THREE.Vector3(-100, -100+200*s, -100+i*10))
+            POINTS[5].push(new THREE.Vector3(100, -100+200*s, -100+i*10))
 
 
-        for(j of POINTS){
-            const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
+            for(j of POINTS){
+                const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
 
-            const line = new THREE.Line(lineGeometry, lineMaterial)
-            scene.add(line)
-        }
+                const line = new THREE.Line(lineGeometry, lineMaterial)
+                scene.add(line)
+            }
+    }
 }
-
+drawGuideLines()
 // Animation Loop
 function animate() {
     requestAnimationFrame(animate)
@@ -137,7 +146,7 @@ window.addEventListener('mousemove', e => {
     
     if(CURSOR.down){
 
-        camera.rotation.y = USER.rotation.y + getAngle(CURSOR.startX - e.clientX, 250)
+        cameraParent.rotation.y = USER.rotation.y + getAngle(CURSOR.startX - e.clientX, 250)
         camera.rotation.x = USER.rotation.z + getAngle(CURSOR.startY - e.clientY, 250)
     }
 
