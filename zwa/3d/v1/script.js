@@ -22,40 +22,35 @@ console.log(cube)
 scene.add(cube)
 
 // Camera Position
-camera.position.z = 10
 
 //guide lines
-const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(100,100,100)'})
-for(let i = -10; i<10; i++){
-    const POINTS = [[], [], [], []]
+const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(255,255,255)'})
+for(let s = 0; s<2; s++)
+    for(let i = 0; i<=20; i++){
+        const POINTS = [[], [], [], [], [], []]
 
-    POINTS[0].push(new THREE.Vector3(-100, i*10, 0))
-    POINTS[0].push(new THREE.Vector3(100, i*10, 0))
-    POINTS[1].push(new THREE.Vector3(i*10, 100, 0))
-    POINTS[1].push(new THREE.Vector3(i*10, -100, 0))
-    POINTS[2].push(new THREE.Vector3(100, 0, i*10))
-    POINTS[2].push(new THREE.Vector3(-100, 0, i*10))
-    POINTS[3].push(new THREE.Vector3(i*10, 0, -100))
-    POINTS[3].push(new THREE.Vector3(i*10, 0, 100))
+        POINTS[0].push(new THREE.Vector3(-100, -100+i*10, -100+200*s))
+        POINTS[0].push(new THREE.Vector3(100, -100+i*10, -100+200*s))
+        POINTS[1].push(new THREE.Vector3(-100+i*10, -100, -100+200*s))
+        POINTS[1].push(new THREE.Vector3(-100+i*10, 100, -100+200*s))        
 
-    for(j of POINTS){
-        const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
+        POINTS[2].push(new THREE.Vector3(-100+200*s, -100+i*10, -100))
+        POINTS[2].push(new THREE.Vector3(-100+200*s, -100+i*10, 100))
+        POINTS[3].push(new THREE.Vector3(-100+200*s, -100, -100+i*10))
+        POINTS[3].push(new THREE.Vector3(-100+200*s, 100, -100+i*10))
 
-        const line = new THREE.Line(lineGeometry, lineMaterial)
-        scene.add(line)
-    }
-    /*
-    const xLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[0])
-    const yLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[1])
-    const zLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[2])
-    const
+        POINTS[4].push(new THREE.Vector3(-100+i*10, -100+200*s, -100))
+        POINTS[4].push(new THREE.Vector3(-100+i*10, -100+200*s, 100))
+        POINTS[5].push(new THREE.Vector3(-100, -100+200*s, -100+i*10))
+        POINTS[5].push(new THREE.Vector3(100, -100+200*s, -100+i*10))
 
-    const xLine = new THREE.Line(xLineGeometry, lineMaterial)
-    const yLine = new THREE.Line(yLineGeometry, lineMaterial)
-    const zLine = new THREE.Line(zLineGeometry, lineMaterial)
 
-    scene.add(xLine, yLine, zLine)
-    */
+        for(j of POINTS){
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
+
+            const line = new THREE.Line(lineGeometry, lineMaterial)
+            scene.add(line)
+        }
 }
 
 // Animation Loop

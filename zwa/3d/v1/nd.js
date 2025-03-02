@@ -22,23 +22,38 @@ console.log(cube)
 scene.add(cube)
 
 // Camera Position
-camera.position.z = 10
+camera.position.y = -200
+camera.rotation.x = 1.6
 
 //guide lines
 const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(255,255,255)'})
-for(let i = -10; i<10; i++){
-    const POINTS = [[], [], []]
+for(let s = 0; s<2; s++)
+    for(let i = 0; i<=20; i++){
+        const POINTS = [[], [], [], [], [], []]
 
-    POINTS[0].push(new THREE.Vector3(-100, i*10, 0))
-    POINTS[0].push(new THREE.Vector3(100, i*10, 0))
+        POINTS[0].push(new THREE.Vector3(-100, -100+i*10, -100+200*s))
+        POINTS[0].push(new THREE.Vector3(100, -100+i*10, -100+200*s))
+        POINTS[0].push(new THREE.Vector3(-100+i*10, -100, -100+200*s))
+        POINTS[0].push(new THREE.Vector3(-100+i*10, 100, -100+200*s))        
 
-    const xLineGeometry = new THREE.BufferGeometry().setFromPoints(POINTS[0])
-    
-    const xLine = new THREE.Line(xLineGeometry, lineMaterial)
+        POINTS[0].push(new THREE.Vector3(-100+200*s, -100+i*10, -100))
+        POINTS[0].push(new THREE.Vector3(-100+200*s, -100+i*10, 100))
+        POINTS[0].push(new THREE.Vector3(-100+200*s, -100, -100+i*10))
+        POINTS[0].push(new THREE.Vector3(-100+200*s, 100, -100+i*10))
 
-    scene.add(xLine)
+        POINTS[0].push(new THREE.Vector3(-100+i*10, -100+200*s, -100))
+        POINTS[0].push(new THREE.Vector3(-100+i*10, -100+200*s, 100))
+        POINTS[0].push(new THREE.Vector3(-100, -100+200*s, -100+i*10))
+        POINTS[0].push(new THREE.Vector3(100, -100+200*s, -100+i*10))
+
+
+        for(j of POINTS){
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
+
+            const line = new THREE.Line(lineGeometry, lineMaterial)
+            scene.add(line)
+        }
 }
-
 
 // Animation Loop
 function animate() {
@@ -52,9 +67,9 @@ animate()
 function resizeScene(){
     let width = 0, height = 0
     if(window.innerWidth > window.innerHeight){
-        width = window.innerHeight+1, height = window.innerHeight+1
+        width = window.innerHeight+2, height = window.innerHeight+2
     }else{
-        width = window.innerWidth+1, height = window.innerWidth+1
+        width = window.innerWidth+2, height = window.innerWidth+2
     }
     
     renderer.setSize(width, height)
@@ -117,7 +132,7 @@ window.addEventListener('mouseup', e => {
     CURSOR.down = false
 
     USER.rotation.y += getAngle(CURSOR.startX - e.clientX, 250)
-    USER.rotation.x += getAngle(CURSOR.startY - e.clientY, 250)
+    USER.rotation.z += getAngle(CURSOR.startY - e.clientY, 250)
 })
 //pohyb a orientace kamery
 window.addEventListener('mousemove', e => {
