@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        background-color: black;
+    }
+    canvas{
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+        display: block;
+
+        display: block;
+        padding: 0; margin: 0;
+        background-color: black;
+    }
+    #myCanvas{
+        background-color: rgba(255,255,255,0.1);
+        z-index: 999;
+
+        width: 100vh; height: 100vh;
+    }
+    @media(orientation: portrait){
+        #myCanvas{
+            width: 100vw; height: 100vw;
+        }
+    }
+</style>
+<body>
+    
+    <canvas id="myCanvas"></canvas>
+
+    <div is="userCont">
+
+        <select id="userNum">
+            <option value="0">user 1</option>
+            <option value="1">user 2</option>
+        </select>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
