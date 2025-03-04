@@ -1,3 +1,22 @@
+const userNum = document.getElementById('userNum')
+var ME = {
+    userNum: userNum.value,
+    position:{
+        x: 0, y: 0, z: 0
+    },
+    rotation:{
+        x: 0, y: 0, z: 0
+    }
+}
+var OP{
+
+}
+userNum.addEventListener('change', () => {
+    ME.userNum = userNum.value
+    console.log(ME.userNum)
+})
+
+//====================================================================================================
 /** @type {HTMLCanvasElement} */
 //====================================================================================================
 /** @type {import('three').Scene} */
