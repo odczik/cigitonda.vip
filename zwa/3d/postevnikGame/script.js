@@ -1,4 +1,4 @@
-import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
+import { OBJLoader } from 'node_modules/three/examples/jsm/loaders/OBJLoader.js'
 
 const userNum = document.getElementById('userNum')
 var ME = {
