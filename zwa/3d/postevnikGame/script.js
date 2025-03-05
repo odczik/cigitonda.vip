@@ -8,8 +8,8 @@ var ME = {
         x: 0, y: 0, z: 0
     }
 }
-var OP{
-
+var OP = {
+    userNum: 0
 }
 userNum.addEventListener('change', () => {
     ME.userNum = userNum.value
