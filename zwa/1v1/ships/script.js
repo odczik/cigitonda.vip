@@ -70,7 +70,6 @@ function sendData(){
     try{
         connection.send(JSON.stringify(data));
     }catch(error){}
-
 }
 function resetId(){
     ME.id = Math.floor(Math.random()*1000)
