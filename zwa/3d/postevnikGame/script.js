@@ -1,5 +1,17 @@
 // import { OBJLoader } from 'node_modules/three/examples/jsm/loaders/OBJLoader.js'
 
+//====================================================================================================
+/** @type {HTMLCanvasElement} */
+//====================================================================================================
+/** @type {import('three').Scene} */
+/** @type {import('three').PerspectiveCamera} */
+/** @type {import('three').WebGLRenderer} */
+/** @type {import('three').BoxGeometry} */
+/** @type {import('three').MeshBasicMaterial} */
+/** @type {import('three').Mesh} */
+//====================================================================================================
+
+
 const userNum = document.getElementById('userNum')
 var ME = {
     userNum: parseInt(userNum.value),
@@ -18,22 +30,44 @@ var INPUT = {
     startY: 0,
     down: false,
 }
+
+
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+// Scene, Camera, Renderer
+const scene = new THREE.Scene()
+const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000)
+const renderer = new THREE.WebGLRenderer()
+renderer.setSize(window.innerWidth, window.innerHeight)
+document.body.appendChild(renderer.domElement)
+
+const cameraParent = new THREE.Object3D();
+const cameraCont = new THREE.Object3D()
+cameraCont.add(cameraParent)
+cameraParent.add(camera); // Add the camera to the parent
+scene.add(cameraCont); // Add the parent to the scene
+
+camera.position.z = 10
+cameraParent.position.z = 0
+cameraCont.position.z = 0
+
+
+let material = new THREE.MeshBasicMaterial({color: 'blue'});
+let geometry = new THREE.BoxGeometry(1, 1, 1);
+const OPcube = new THREE.Mesh(geometry, material);
+scene.add(OPcube);
+
+material = new THREE.MeshBasicMaterial({color: 'red'});
+geometry = new THREE.BoxGeometry(1, 1, 1);
+const cube = new THREE.Mesh(geometry, material);
+scene.add(cube);
+cameraParent.add(cube)
+
+
 const formPlayer = () => {
     try{
         scene.remove(cube)
     }catch(error){}
-
-    let material
-    if(ME.userNum == 0){
-        material = new THREE.MeshBasicMaterial({color: 'red'});
-    }else{    
-        material = new THREE.MeshBasicMaterial({color: 'blue'});
-    }
-    
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-    cameraParent.add(cube)
 
     window.addEventListener('keydown', e => {
 
@@ -50,20 +84,28 @@ const formPlayer = () => {
             case 'd':
                 ME.position.x++
                 break
-            case 'space':
+            case ' ':
                 ME.position.y++
                 break
             case 'shift':
                 ME.position.y--
                 break
         }
-        console.log(ME)
-        cameraParent.position.x = ME.position.x
-        cameraParent.position.y = ME.position.y
-        cameraParent.position.z = ME.position.z
+        console.log(e.key)
+        cameraCont.position.x = ME.position.x
+        cameraCont.position.y = ME.position.y
+        cameraCont.position.z = ME.position.z
     
         sendData()
     })
+}
+const playerColor = () => {
+    if(ME.userNum == 0) cube.material.color.set('red')
+    else cube.material.color.set('blue')
+}
+const opColor = () => {
+    if(OP.userNum == 0) OPcube.material.color.set('red')
+    else OPcube.material.color.set('blue')
 }
 //otevreni ws
 const connection = new WebSocket("ws://localhost:8080");
@@ -87,25 +129,10 @@ connection.onclose = () => {
 connection.onerror = (event) => {
     console.error("WebSocket error observed:", event);
 };
-let run = 0
 connection.onmessage = (event) => {
     
-    let OPcube
-    
     const data = JSON.parse(event.data.toString());
-    if(OP.userNum != data.userNum || run == 0){
-        let material
-        if(OP.userNum == 0){
-            material = new THREE.MeshBasicMaterial({color: 'red'});
-        }else{    
-            material = new THREE.MeshBasicMaterial({color: 'blue'});
-        }
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        OPcube = new THREE.Mesh(geometry, material);
-        scene.add(OPcube);
-        run++
-    }
-
+    
     if(data.userNum != ME.userNum){
         OP = data
         console.log(OP, data)
@@ -127,39 +154,6 @@ document.getElementById('reconnect').addEventListener('click', () => {
     sendData()
     console.log(true)
 })
-//====================================================================================================
-/** @type {HTMLCanvasElement} */
-//====================================================================================================
-/** @type {import('three').Scene} */
-/** @type {import('three').PerspectiveCamera} */
-/** @type {import('three').WebGLRenderer} */
-/** @type {import('three').BoxGeometry} */
-/** @type {import('three').MeshBasicMaterial} */
-/** @type {import('three').Mesh} */
-//====================================================================================================
-
-const canvas = document.getElementById('myCanvas');
-const ctx = canvas.getContext('2d');
-// Scene, Camera, Renderer
-const scene = new THREE.Scene()
-const camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000)
-const renderer = new THREE.WebGLRenderer()
-renderer.setSize(window.innerWidth, window.innerHeight)
-document.body.appendChild(renderer.domElement)
-
-const cameraParent = new THREE.Object3D();
-const cameraCont = new THREE.Object3D()
-cameraCont.add(cameraParent)
-cameraParent.add(camera); // Add the camera to the parent
-scene.add(cameraCont); // Add the parent to the scene
-
-camera.position.z = 10
-cameraParent.position.z = 0
-cameraCont.position.z = 0
-
-console.log(cameraCont.children)
-console.log(cameraParent.children)
-
 const drawGuideLines = () => {
     //guide lines
     const lineMaterial = new THREE.LineBasicMaterial({color: 'rgb(255,255,255)'})
