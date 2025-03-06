@@ -67,31 +67,55 @@ cameraParent.add(cube)
 const formPlayer = () => {
     try{
         scene.remove(cube)
-    }catch(error){}
+    }catch(error){};
 
     window.addEventListener('keydown', e => {
 
-        switch(e.key.toLowerCase()){
-            case 'w':
-                ME.position.z++
-                break
-            case 's':
-                ME.position.z--
-                break
-            case 'a':
-                ME.position.x--
-                break
-            case 'd':
-                ME.position.x++
-                break
-            case ' ':
-                ME.position.y++
-                break
-            case 'shift':
-                ME.position.y--
-                break
+        if(ME.userNum == 0){
+            switch(e.key.toLowerCase()){
+                case 'w':
+                    ME.position.z--
+                    break
+                case 's':
+                    ME.position.z++
+                    break
+                case 'a':
+                    ME.position.x--
+                    break
+                case 'd':
+                    ME.position.x++
+                    break
+                case ' ':
+                    ME.position.y+=10
+                    break
+                case 'shift':
+                    ME.position.y--
+                    break
+            }
+            console.log(e.key)
+        }else{
+            switch(e.key.toLowerCase()){
+                case 'arrowup':
+                    ME.position.z--
+                    break
+                case 'arrowdown':
+                    ME.position.z++
+                    break
+                case 'arrowleft':
+                    ME.position.x--
+                    break
+                case 'arrowright':
+                    ME.position.x++
+                    break
+                case '1':
+                    ME.position.y+=100
+                    break
+                case '0':
+                    ME.position.y--
+                    break
+            }
+            console.log(e.key.toLowerCase())
         }
-        console.log(e.key)
         cameraCont.position.x = ME.position.x
         cameraCont.position.y = ME.position.y
         cameraCont.position.z = ME.position.z
