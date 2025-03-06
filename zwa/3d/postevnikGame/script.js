@@ -1,4 +1,4 @@
-import { OBJLoader } from 'node_modules/three/examples/jsm/loaders/OBJLoader.js'
+// import { OBJLoader } from 'node_modules/three/examples/jsm/loaders/OBJLoader.js'
 
 const userNum = document.getElementById('userNum')
 var ME = {
@@ -13,10 +13,57 @@ var ME = {
 var OP = {
     userNum: 0
 }
-var CURSOR = {
+var INPUT = {
     startX: 0,
     startY: 0,
-    down: false
+    down: false,
+}
+const formPlayer = () => {
+    try{
+        scene.remove(cube)
+    }catch(error){}
+
+    let material
+    if(ME.userNum == 0){
+        material = new THREE.MeshBasicMaterial({color: 'red'});
+    }else{    
+        material = new THREE.MeshBasicMaterial({color: 'blue'});
+    }
+    
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    cameraParent.add(cube)
+
+    window.addEventListener('keydown', e => {
+
+        switch(e.key.toLowerCase()){
+            case 'w':
+                ME.position.z++
+                break
+            case 's':
+                ME.position.z--
+                break
+            case 'a':
+                ME.position.x--
+                break
+            case 'd':
+                ME.position.x++
+                break
+            case 'space':
+                ME.position.y++
+                break
+            case 'shift':
+                ME.position.y--
+                break
+        }
+        console.log(ME)
+        cameraParent.position.x = ME.position.x
+        cameraParent.position.y = ME.position.y
+        cameraParent.position.z = ME.position.z
+    
+        sendData()
+    })
 }
 //otevreni ws
 const connection = new WebSocket("ws://localhost:8080");
@@ -25,6 +72,8 @@ userNum.addEventListener('change', () => {
     console.log(ME.userNum)
 
     sendData()
+
+    formPlayer()
 })
 //posilani dat na server
 connection.onopen = () => {
@@ -38,16 +87,33 @@ connection.onclose = () => {
 connection.onerror = (event) => {
     console.error("WebSocket error observed:", event);
 };
-
+let run = 0
 connection.onmessage = (event) => {
     
-    const data = JSON.parse(event.data.toString());
+    let OPcube
     
+    const data = JSON.parse(event.data.toString());
+    if(OP.userNum != data.userNum || run == 0){
+        let material
+        if(OP.userNum == 0){
+            material = new THREE.MeshBasicMaterial({color: 'red'});
+        }else{    
+            material = new THREE.MeshBasicMaterial({color: 'blue'});
+        }
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        OPcube = new THREE.Mesh(geometry, material);
+        scene.add(OPcube);
+        run++
+    }
+
     if(data.userNum != ME.userNum){
         OP = data
-        window.alert("connection established")
+        console.log(OP, data)
+    
+        OPcube.position.x = OP.position.x
+        OPcube.position.y = OP.position.y
+        OPcube.position.z = OP.position.z
     }
-    console.log(data)
 }
 function sendData(){
     
@@ -61,8 +127,6 @@ document.getElementById('reconnect').addEventListener('click', () => {
     sendData()
     console.log(true)
 })
-
-const loader3d = new OBJLoader()
 //====================================================================================================
 /** @type {HTMLCanvasElement} */
 //====================================================================================================
@@ -144,56 +208,55 @@ function resizeScene(){
 resizeScene()
 window.addEventListener('resize', resizeScene)
 
-//zahajeni animace + tocici se kostka
-const geometry = new THREE.BoxGeometry()
-const material = new THREE.MeshBasicMaterial({color: 'rgb(255,0,0)'})
-const cube = new THREE.Mesh(geometry, material)
-console.log(cube)
-scene.add(cube)
-
 function animate() {
     requestAnimationFrame(animate)
-
-    cube.rotation.x += 0.01
-    cube.rotation.y += 0.01
-
     renderer.render(scene, camera)
 }
 animate()
-
+formPlayer()
 //orientace v prostoru
 function getAngle(length, sensitivity){
     return Math.atan(length/sensitivity)
 }
 window.addEventListener('mousedown', e => {
-    CURSOR.startX = e.clientX, CURSOR.startY = e.clientY
-    CURSOR.down = true
+    INPUT.startX = e.clientX, INPUT.startY = e.clientY
+    INPUT.down = true
 })
 window.addEventListener('mouseup', e => {
-    CURSOR.down = false
+    INPUT.down = false
 
-    ME.rotation.y += getAngle(CURSOR.startX - e.clientX, 250)
-    ME.rotation.z += getAngle(CURSOR.startY - e.clientY, 250)
+    ME.rotation.y += getAngle(INPUT.startX - e.clientX, 250)
+    ME.rotation.z += getAngle(INPUT.startY - e.clientY, 250)
 })
 window.addEventListener('mousemove', e => {
     
-    if(CURSOR.down){
+    if(INPUT.down){
 
-        cameraCont.rotation.y = ME.rotation.y + getAngle(CURSOR.startX - e.clientX, 250)
-        cameraParent.rotation.x = ME.rotation.z + getAngle(CURSOR.startY - e.clientY, 250)
+        cameraCont.rotation.y = ME.rotation.y + getAngle(INPUT.startX - e.clientX, 250)
+        cameraParent.rotation.x = ME.rotation.z + getAngle(INPUT.startY - e.clientY, 250)
     }
 
 })
+window.addEventListener('keydown', e => {
 
-loader3d.load(
-    'assets/panacek.obj',
-    function(object){
-        scene.add(object)
-    },
-    function(xhr){
-        console.log((xhr.loaded / xhr.total * 100 ) + '% loaded')
-    },
-    function(error){
-        console.log('error')
+    switch(e.key.toLowerCase()){
+        case 'w':
+            INPUT.w = true
+            break
+        case 's':
+            INPUT.s = true
+            break
+        case 'a':
+            INPUT.a = true
+            break
+        case 'd':
+            INPUT.d = true
+            break
+        case 'space':
+            INPUT.space = true
+            break
+        case 'shift':
+            INPUT.shift = true
+            break
     }
-)
+})
