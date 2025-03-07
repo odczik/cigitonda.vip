@@ -1,4 +1,4 @@
-// import { OBJLoader } from 'node_modules/three/examples/jsm/loaders/OBJLoader.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 //====================================================================================================
 /** @type {HTMLCanvasElement} */
@@ -10,7 +10,6 @@
 /** @type {import('three').MeshBasicMaterial} */
 /** @type {import('three').Mesh} */
 //====================================================================================================
-
 
 const userNum = document.getElementById('userNum')
 var ME = {
@@ -29,8 +28,10 @@ var INPUT = {
     startX: 0,
     startY: 0,
     down: false,
+    movement:{
+        w: false, s: false, a: false, d: false
+    }
 }
-
 
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
@@ -64,63 +65,37 @@ scene.add(cube);
 cameraParent.add(cube)
 
 
-const formPlayer = () => {
-    try{
-        scene.remove(cube)
-    }catch(error){};
-
+const controls = () => {
+    
     window.addEventListener('keydown', e => {
 
-        if(ME.userNum == 0){
-            switch(e.key.toLowerCase()){
-                case 'w':
-                    ME.position.z--
-                    break
-                case 's':
-                    ME.position.z++
-                    break
-                case 'a':
-                    ME.position.x--
-                    break
-                case 'd':
-                    ME.position.x++
-                    break
-                case ' ':
-                    ME.position.y+=10
-                    break
-                case 'shift':
-                    ME.position.y--
-                    break
-            }
-            console.log(e.key)
-        }else{
-            switch(e.key.toLowerCase()){
-                case 'arrowup':
-                    ME.position.z--
-                    break
-                case 'arrowdown':
-                    ME.position.z++
-                    break
-                case 'arrowleft':
-                    ME.position.x--
-                    break
-                case 'arrowright':
-                    ME.position.x++
-                    break
-                case '1':
-                    ME.position.y+=100
-                    break
-                case '0':
-                    ME.position.y--
-                    break
-            }
-            console.log(e.key.toLowerCase())
+        switch(e.key.toLowerCase()){
+            case 'w':
+                ME.position.z--
+                break
+            case 's':
+                ME.position.z++
+                break
+            case 'a':
+                ME.position.x--
+                break
+            case 'd':
+                ME.position.x++
+                break
+            case ' ':
+                ME.position.y+=10
+                break
+            case 'shift':
+                ME.position.y--
+                break
         }
         cameraCont.position.x = ME.position.x
         cameraCont.position.y = ME.position.y
         cameraCont.position.z = ME.position.z
     
         sendData()
+        playerColor()
+        opColor()
     })
 }
 const playerColor = () => {
@@ -139,7 +114,7 @@ userNum.addEventListener('change', () => {
 
     sendData()
 
-    formPlayer()
+    playerColor()
 })
 //posilani dat na server
 connection.onopen = () => {
@@ -159,6 +134,8 @@ connection.onmessage = (event) => {
     
     if(data.userNum != ME.userNum){
         OP = data
+        opColor()
+    
         console.log(OP, data)
     
         OPcube.position.x = OP.position.x
@@ -231,7 +208,7 @@ function animate() {
     renderer.render(scene, camera)
 }
 animate()
-formPlayer()
+controls()
 //orientace v prostoru
 function getAngle(length, sensitivity){
     return Math.atan(length/sensitivity)
@@ -255,26 +232,37 @@ window.addEventListener('mousemove', e => {
     }
 
 })
-window.addEventListener('keydown', e => {
+window.addEventListener('keydown', e =>{
 
     switch(e.key.toLowerCase()){
         case 'w':
-            INPUT.w = true
+            INPUT.movement.w = true
             break
         case 's':
-            INPUT.s = true
+            INPUT.movement.s = true
             break
         case 'a':
-            INPUT.a = true
+            INPUT.movement.a = true
             break
         case 'd':
-            INPUT.d = true
+            INPUT.movement.d = true
             break
-        case 'space':
-            INPUT.space = true
+    }
+})
+window.addEventListener('keyup', e =>{
+
+    switch(e.key.toLowerCase()){
+        case 'w':
+            INPUT.movement.w = true
             break
-        case 'shift':
-            INPUT.shift = true
+        case 's':
+            INPUT.movement.s = true
+            break
+        case 'a':
+            INPUT.movement.a = true
+            break
+        case 'd':
+            INPUT.movement.d = true
             break
     }
 })
