@@ -1,4 +1,5 @@
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import * as THREE from './node_modules/three/build/three.module.js';
+import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
 //====================================================================================================
 /** @type {HTMLCanvasElement} */
@@ -178,7 +179,7 @@ const drawGuideLines = () => {
             POINTS[5].push(new THREE.Vector3(100, -100+200*s, -100+i*10))
 
 
-            for(j of POINTS){
+            for(let j of POINTS){
                 const lineGeometry = new THREE.BufferGeometry().setFromPoints(j)
 
                 const line = new THREE.Line(lineGeometry, lineMaterial)
