@@ -1,5 +1,7 @@
 import * as THREE from './node_modules/three/build/three.module.js';
-import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import {GLTFLoader} from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import {FBXLoader} from './node_modules/three/examples/jsm/loaders/FBXLoader.js'
+
 THREE.ColorManagement.enabled = true;
 //====================================================================================================
 /** @type {HTMLCanvasElement} */
@@ -66,21 +68,37 @@ const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 cameraParent.add(cube)
 
-const loader = new GLTFLoader();
-loader.load('assets/panacek0.glb', function (gltf){
+/*
+const loaderGBL = new GLTFLoader();
+loaderGBL.load('assets/panacek0.glb', function (gltf){
 
     ME.model = gltf.scene
 	scene.add(ME.model);
-    cameraCont.add(ME.model)
+    cameraParent.add(ME.model)
 
 }, undefined, function(error){
 	console.error(error);
 } );
-// cameraCont.add(ME.model)
+*/
+
+let mixer
+const loaderFBX = new FBXLoader()
+loaderFBX.load('assets/goblin-utok-animace.fbx', (fbx) => {
+    fbx.scale.set(0.03,0.03,0.03)
+    ME.model = fbx
+    scene.add(ME.model)
+
+    mixer = new THREE.AnimationMixer(ME.model)
+    const action = mixer.clipAction(ME.model.animations[0])
+    action.play()
+})
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Optional
 scene.add(ambientLight);
 
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(10, 10, 10);
+scene.add(light);
 
 const controls = () => {
     
@@ -221,8 +239,14 @@ function resizeScene(){
 resizeScene()
 window.addEventListener('resize', resizeScene)
 
+
+const clock = new THREE.Clock()
 function animate() {
     requestAnimationFrame(animate)
+
+    const delta = clock.getDelta()
+    if(mixer) mixer.update(delta)
+
     renderer.render(scene, camera)
 }
 animate()
