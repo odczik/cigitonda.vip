@@ -68,8 +68,8 @@ const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 cameraParent.add(cube)
 
+const loaderGLB = new GLTFLoader();
 /*
-const loaderGBL = new GLTFLoader();
 loaderGBL.load('assets/panacek0.glb', function (gltf){
 
     ME.model = gltf.scene
@@ -81,7 +81,7 @@ loaderGBL.load('assets/panacek0.glb', function (gltf){
 } );
 */
 
-let mixer
+let mixer, action
 const loaderFBX = new FBXLoader()
 loaderFBX.load('assets/goblin-utok-animace.fbx', (fbx) => {
     fbx.scale.set(0.05,0.05,0.05)
@@ -89,12 +89,25 @@ loaderFBX.load('assets/goblin-utok-animace.fbx', (fbx) => {
     scene.add(ME.model)
 
     mixer = new THREE.AnimationMixer(ME.model)
-    const action = mixer.clipAction(ME.model.animations[0])
+    action = mixer.clipAction(ME.model.animations[0])
     action.play()
 })
 
 const ambientLight = new THREE.AmbientLight(0xffffff, 10); // Optional
 scene.add(ambientLight);
+
+const gbelCont = new THREE.Object3D()
+scene.add(gbelCont)
+loaderGLB.load('assets/gbel.glb', (glb) => {
+
+    let gbel = glb.scene
+    scene.add(gbel)
+
+    gbel.scale.set(5, 5, 5)
+
+    gbelCont.add(gbel)
+})
+gbelCont.position.x = 5
 
 const controls = () => {
     
@@ -114,10 +127,13 @@ const controls = () => {
                 ME.position.x++
                 break
             case ' ':
-                ME.position.y+=10
+                ME.position.y++
                 break
             case 'shift':
                 ME.position.y--
+                break
+            case 'q':
+                action.paused = action.paused ? false : true
                 break
         }
         cameraCont.position.x = ME.position.x
