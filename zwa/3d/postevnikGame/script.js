@@ -84,7 +84,7 @@ loaderGBL.load('assets/panacek0.glb', function (gltf){
 let mixer
 const loaderFBX = new FBXLoader()
 loaderFBX.load('assets/goblin-utok-animace.fbx', (fbx) => {
-    fbx.scale.set(0.03,0.03,0.03)
+    fbx.scale.set(0.05,0.05,0.05)
     ME.model = fbx
     scene.add(ME.model)
 
@@ -93,12 +93,8 @@ loaderFBX.load('assets/goblin-utok-animace.fbx', (fbx) => {
     action.play()
 })
 
-const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Optional
+const ambientLight = new THREE.AmbientLight(0xffffff, 10); // Optional
 scene.add(ambientLight);
-
-const light = new THREE.DirectionalLight(0xffffff, 1);
-light.position.set(10, 10, 10);
-scene.add(light);
 
 const controls = () => {
     
