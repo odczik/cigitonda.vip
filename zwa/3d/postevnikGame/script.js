@@ -1,6 +1,6 @@
 import * as THREE from './node_modules/three/build/three.module.js';
 import { GLTFLoader } from './node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-
+THREE.ColorManagement.enabled = true;
 //====================================================================================================
 /** @type {HTMLCanvasElement} */
 //====================================================================================================
@@ -20,7 +20,8 @@ var ME = {
     },
     rotation:{
         x: 0, y: 0, z: 0
-    }
+    },
+    model: null
 }
 var OP = {
     userNum: 0
@@ -53,7 +54,7 @@ camera.position.z = 10
 cameraParent.position.z = 0
 cameraCont.position.z = 0
 
-
+//pridani postavy hrace do sceny
 let material = new THREE.MeshBasicMaterial({color: 'blue'});
 let geometry = new THREE.BoxGeometry(1, 1, 1);
 const OPcube = new THREE.Mesh(geometry, material);
@@ -64,6 +65,21 @@ geometry = new THREE.BoxGeometry(1, 1, 1);
 const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 cameraParent.add(cube)
+
+const loader = new GLTFLoader();
+loader.load('assets/panacek0.glb', function (gltf){
+
+    ME.model = gltf.scene
+	scene.add(ME.model);
+    cameraCont.add(ME.model)
+
+}, undefined, function(error){
+	console.error(error);
+} );
+// cameraCont.add(ME.model)
+
+const ambientLight = new THREE.AmbientLight(0xffffff, 1); // Optional
+scene.add(ambientLight);
 
 
 const controls = () => {
@@ -107,6 +123,7 @@ const opColor = () => {
     if(OP.userNum == 0) OPcube.material.color.set('red')
     else OPcube.material.color.set('blue')
 }
+
 //otevreni ws
 const connection = new WebSocket("ws://localhost:8080");
 userNum.addEventListener('change', () => {
@@ -137,7 +154,7 @@ connection.onmessage = (event) => {
         OP = data
         opColor()
     
-        console.log(OP, data)
+        // console.log(OP, data)
     
         OPcube.position.x = OP.position.x
         OPcube.position.y = OP.position.y
@@ -223,6 +240,12 @@ window.addEventListener('mouseup', e => {
 
     ME.rotation.y += getAngle(INPUT.startX - e.clientX, 250)
     ME.rotation.z += getAngle(INPUT.startY - e.clientY, 250)
+
+    ME.rotation.x %= Math.PI
+    ME.rotation.y %= Math.PI
+    ME.rotation.z %= Math.PI
+
+    console.log(ME.rotation)
 })
 window.addEventListener('mousemove', e => {
     
