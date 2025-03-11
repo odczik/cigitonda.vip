@@ -15,6 +15,7 @@ THREE.ColorManagement.enabled = true;
 //====================================================================================================
 
 const userNum = document.getElementById('userNum')
+var MEmodel = null
 var ME = {
     userNum: parseInt(userNum.value),
     position:{
@@ -22,8 +23,7 @@ var ME = {
     },
     rotation:{
         x: 0, y: 0, z: 0
-    },
-    model: null
+    }
 }
 var OP = {
     userNum: 0
@@ -72,9 +72,9 @@ const loaderGLB = new GLTFLoader();
 /*
 loaderGBL.load('assets/panacek0.glb', function (gltf){
 
-    ME.model = gltf.scene
-	scene.add(ME.model);
-    cameraParent.add(ME.model)
+    MEmodel = gltf.scene
+	scene.add(MEmodel);
+    cameraParent.add(MEmodel)
 
 }, undefined, function(error){
 	console.error(error);
@@ -85,11 +85,11 @@ let mixer, action
 const loaderFBX = new FBXLoader()
 loaderFBX.load('assets/goblin-utok-animace.fbx', (fbx) => {
     fbx.scale.set(0.05,0.05,0.05)
-    ME.model = fbx
-    scene.add(ME.model)
+    MEmodel = fbx
+    scene.add(MEmodel)
 
-    mixer = new THREE.AnimationMixer(ME.model)
-    action = mixer.clipAction(ME.model.animations[0])
+    mixer = new THREE.AnimationMixer(MEmodel)
+    action = mixer.clipAction(MEmodel.animations[0])
     action.play()
 })
 
