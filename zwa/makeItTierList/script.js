@@ -101,7 +101,8 @@ imgInput.addEventListener('change', () => {
 const DIRS = {
     'assets/kocky/': 14,
     'assets/trida/': 21,
-    'assets/starwars/': 47
+    'assets/starwars/': 47,
+    'assets/starWarsMovies/': 10
 }
 directory.addEventListener('change', () =>{
     clearTable()
