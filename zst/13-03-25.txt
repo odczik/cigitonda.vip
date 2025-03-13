@@ -1,0 +1,10 @@
+enable
+config t
+vlan 10
+name USER
+int f0/2
+#switchport mode trunk
+[terminal config]
+ip dhcp pool v110
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
