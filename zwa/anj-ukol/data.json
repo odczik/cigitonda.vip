@@ -1,0 +1,28 @@
+[
+      { "id": 0, "english": "How much does this cost?", "czech": "Kolik to stojí?" },
+      { "id": 1, "english": "Do you accept credit cards?", "czech": "Berete kreditní karty?" },
+      { "id": 2, "english": "Can I pay in cash?", "czech": "Mohu platit v hotovosti?" },
+      { "id": 3, "english": "Where is the fitting room?", "czech": "Kde je zkušební kabinka?" },
+      { "id": 4, "english": "Do you have this in a different size?", "czech": "Máte to v jiné velikosti?" },
+      { "id": 5, "english": "Do you have this in a different color?", "czech": "Máte to v jiné barvě?" },
+      { "id": 6, "english": "Is there a discount on this?", "czech": "Je na to sleva?" },
+      { "id": 7, "english": "Can I get a receipt, please?", "czech": "Můžete mi dát účtenku, prosím?" },
+      { "id": 8, "english": "I’m just looking, thank you.", "czech": "Jen se dívám, děkuji." },
+      { "id": 9, "english": "Can I return this if it doesn’t fit?", "czech": "Mohu to vrátit, pokud mi to nebude sedět?" },
+      { "id": 10, "english": "Where can I find the dairy section?", "czech": "Kde najdu mléčné výrobky?" },
+      { "id": 11, "english": "Do you sell organic products?", "czech": "Prodáváte bio produkty?" },
+      { "id": 12, "english": "Can you help me find this item?", "czech": "Můžete mi pomoci najít tuto položku?" },
+      { "id": 13, "english": "Do you have fresh bread?", "czech": "Máte čerstvý chléb?" },
+      { "id": 14, "english": "Can you gift-wrap this?", "czech": "Můžete to zabalit jako dárek?" },
+      { "id": 15, "english": "Can I try this on?", "czech": "Mohu si to vyzkoušet?" },
+      { "id": 16, "english": "Do you have this item in stock?", "czech": "Máte tuto položku skladem?" },
+      { "id": 17, "english": "What are your opening hours?", "czech": "Jaká je vaše otevírací doba?" },
+      { "id": 18, "english": "Where can I find the checkout?", "czech": "Kde najdu pokladnu?" },
+      { "id": 19, "english": "Do you offer home delivery?", "czech": "Nabízíte doručení domů?" },
+      { "id": 20, "english": "Can I exchange this for a different item?", "czech": "Mohu to vyměnit za jinou položku?" },
+      { "id": 21, "english": "Are there any special offers today?", "czech": "Jsou dnes nějaké speciální nabídky?" },
+      { "id": 22, "english": "Do you have a loyalty program?", "czech": "Máte věrnostní program?" },
+      { "id": 23, "english": "Can you show me where this product is?", "czech": "Můžete mi ukázat, kde je tento produkt?" },
+      { "id": 24, "english": "Can I speak to the manager?", "czech": "Mohu mluvit s vedoucím?" }
+]
+  
