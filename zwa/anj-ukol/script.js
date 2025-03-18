@@ -1,5 +1,7 @@
 var USER = {
-    connected: []
+    connected: [],
+    pairs: [],
+    czArr: [], ajArr: []
 }
 const size = 4
 var divIds = []
@@ -39,6 +41,7 @@ const generateCells = () => {
             row.appendChild(cell)
 
             cell.onclick = () => {
+                
                 if(USER.connected.length == 2){
                     for(i of USER.connected){
                         const tableCell = document.getElementById('c' + i.substring(1,4))
@@ -53,6 +56,8 @@ const generateCells = () => {
                     
                 }
                 console.log(USER.connected)
+
+                checkParing()
             }
 
             let index
@@ -68,13 +73,11 @@ const generateCells = () => {
 generateCells()
 const fillCells = () => {
 
-    let czArr = [], ajArr = []
-
     for(let i of divIds){
 
-        if(Math.floor(Math.random()*2) == 0 && ajArr.length!=size*size/2) ajArr.push(i)
-        else if(czArr.length==size*size/2) ajArr.push(i)
-        else czArr.push(i)
+        if(Math.floor(Math.random()*2) == 0 && USER.ajArr.length!=size*size/2) USER.ajArr.push(i)
+        else if(USER.czArr.length==size*size/2) USER.ajArr.push(i)
+        else USER.czArr.push(i)
     }
 
     fetch('data.json')
@@ -84,7 +87,7 @@ const fillCells = () => {
         let used = []
         for(let index = 0; index<size*size/2; index++){
 
-            const div1 = document.getElementById(czArr[index]), div2 = document.getElementById(ajArr[index])
+            const div1 = document.getElementById(USER.czArr[index]), div2 = document.getElementById(USER.ajArr[index])
 
             let idx
             do{
@@ -99,9 +102,18 @@ const fillCells = () => {
 }
 fillCells()
 const checkParing = () => {
-    fetch('data.json')
-    .then(response => response.json())
-    .then(data => {
+    
+    for(let i = 0; i<size*size/2; i++){
 
-    })
+        if(USER.connected.includes(USER.czArr[i]) && USER.connected.includes(USER.ajArr[i])){
+            USER.pairs.push([USER.connected[0], USER.connected[1]])
+            
+            document.getElementById('c' + substring(USER.connected[0])).style.backgroundColor = 'rgb(200,75,200)'
+            document.getElementById('c' + substring(USER.connected[1])).style.backgroundColor = 'rgb(200,75,200)'
+            console.log(USER.ajArr[i], USER.czArr[i])
+            break
+        }
+    }
+    USER.connected = []
 }
+console.log(USER)
