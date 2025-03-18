@@ -39,11 +39,20 @@ const generateCells = () => {
             row.appendChild(cell)
 
             cell.onclick = () => {
-                USER.connected[USER.connected.length] = div.id
-
-                cont.style.border = '2px solid black'
-
-                
+                if(USER.connected.length == 2){
+                    for(i of USER.connected){
+                        const tableCell = document.getElementById('c' + i.substring(1,4))
+                        tableCell.style.boxShadow = ''
+                        tableCell.style.background = ''
+                    }
+                    USER.connected = []
+                }else{
+                    USER.connected[USER.connected.length] = div.id
+                    cell.style.boxShadow = '0 0 5px rgb(255,0,0)'
+                    cell.style.background = 'rgba(255,0,0,0.4)'
+                    
+                }
+                console.log(USER.connected)
             }
 
             let index
@@ -89,3 +98,10 @@ const fillCells = () => {
     .catch(error => console.error('Error loading data:', error));
 }
 fillCells()
+const checkParing = () => {
+    fetch('data.json')
+    .then(response => response.json())
+    .then(data => {
+
+    })
+}
