@@ -3,7 +3,7 @@ var USER = {
     pairs: [],
     czArr: [], ajArr: []
 }
-const colorArr = []
+const colorArr = ['rgb(200,0,0)','rgb(200,200,0)','rgb(200,0,200)','rgb(0,200,0)','rgb(0,200,200)','rgb(100,0,0)','rgb(100,0,0)','rgb(100,100,0)','rgb(100,0,100)','rgb(0,0,100)','rgb(200,50,200)','rgb(200,50,0)','rgb(0,200,50)','rgb(200,0,50)','rgb(200,200,50)','rgb(50,2l0,50)']
 const size = 4
 var divIds = []
 for(let i = 0; i<size*size; i++) divIds.push(0)
@@ -105,8 +105,8 @@ const checkParing = () => {
         if(USER.connected.includes(USER.czArr[i]) && USER.connected.includes(USER.ajArr[i])){
             USER.pairs.push([USER.connected[0], USER.connected[1]])
             
-            document.getElementById('c' + USER.connected[0].substring(1,4)).style.backgroundColor = 'rgb(200,75,200)'
-            document.getElementById('c' + USER.connected[1].substring(1,4)).style.backgroundColor = 'rgb(200,75,200)'
+            document.getElementById('c' + USER.connected[0].substring(1,4)).style.backgroundColor = colorArr[i]
+            document.getElementById('c' + USER.connected[1].substring(1,4)).style.backgroundColor = colorArr[i]
             console.log(USER.ajArr[i], USER.czArr[i])
             
             USER.connected = []
