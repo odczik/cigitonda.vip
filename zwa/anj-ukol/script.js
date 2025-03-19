@@ -3,6 +3,7 @@ var USER = {
     pairs: [],
     czArr: [], ajArr: []
 }
+const colorArr = []
 const size = 4
 var divIds = []
 for(let i = 0; i<size*size; i++) divIds.push(0)
@@ -41,7 +42,6 @@ const generateCells = () => {
             row.appendChild(cell)
 
             cell.onclick = () => {
-                
                 if(USER.connected.length == 2){
                     for(i of USER.connected){
                         const tableCell = document.getElementById('c' + i.substring(1,4))
@@ -50,13 +50,10 @@ const generateCells = () => {
                     }
                     USER.connected = []
                 }else{
-                    USER.connected[USER.connected.length] = div.id
+                    USER.connected.push(div.id)
                     cell.style.boxShadow = '0 0 5px rgb(255,0,0)'
                     cell.style.background = 'rgba(255,0,0,0.4)'
-                    
                 }
-                console.log(USER.connected)
-
                 checkParing()
             }
 
@@ -108,12 +105,13 @@ const checkParing = () => {
         if(USER.connected.includes(USER.czArr[i]) && USER.connected.includes(USER.ajArr[i])){
             USER.pairs.push([USER.connected[0], USER.connected[1]])
             
-            document.getElementById('c' + substring(USER.connected[0])).style.backgroundColor = 'rgb(200,75,200)'
-            document.getElementById('c' + substring(USER.connected[1])).style.backgroundColor = 'rgb(200,75,200)'
+            document.getElementById('c' + USER.connected[0].substring(1,4)).style.backgroundColor = 'rgb(200,75,200)'
+            document.getElementById('c' + USER.connected[1].substring(1,4)).style.backgroundColor = 'rgb(200,75,200)'
             console.log(USER.ajArr[i], USER.czArr[i])
+            
+            USER.connected = []
             break
         }
     }
-    USER.connected = []
 }
 console.log(USER)
