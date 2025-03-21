@@ -11,8 +11,8 @@ sudo usermod -aG pohadky robin
 sudo usermod -aG zaci robin
 sudo usermod -aG user robin
 
-sudo usermod -n loupeznici user
-sudo usermod -n user zaci
+sudo groupmod -n loupeznici user
+sudo groupmod -n user zaci
 
 cat /etc/passwd
 
