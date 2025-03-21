@@ -1,0 +1,18 @@
+sudo groupadd zaci
+sudo groupadd pohadky
+
+sudo adduser jaja
+sudo adduser paja
+sudo adduser robin
+
+sudo usermod -aG pohadky paja
+sudo usermod -aG pohadky jaja
+sudo usermod -aG pohadky robin
+sudo usermod -aG zaci robin
+sudo usermod -aG user robin
+
+sudo usermod -n loupeznici user
+sudo usermod -n user zaci
+
+cat /etc/passwd
+
