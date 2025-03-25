@@ -269,14 +269,13 @@ const addMovement = (angle) => {
     if(angle>=Math.PI*2) angle%=Math.PI*2
 
     let Z = Math.cos(angle), X = Math.sin(angle)
-    console.log(angle)
 
     if(angle>=0&&angle<=Math.PI/2){
-        ME.position.x += X, ME.position.z -= Z
+        ME.position.x -= X, ME.position.z -= Z
         console.log('w')
 
     }else if(angle>Math.PI/2 && angle<Math.PI){
-        ME.position.x -= X, ME.position.z += Z
+        ME.position.x += Z, ME.position.z += X
         console.log('d')
 
     }else if(angle>=Math.PI && angle<=Math.PI*3/2){
@@ -284,8 +283,8 @@ const addMovement = (angle) => {
         console.log('s')
 
     }else if(angle>Math.PI*3/2 && angle<Math.PI*2){
-        ME.position.x -= X, ME.position.z -= Z
-        console.log('a')
+        ME.position.x += Z, ME.position.z += X
+        console.log('aw')
     }
 }
 const controls = () => {
