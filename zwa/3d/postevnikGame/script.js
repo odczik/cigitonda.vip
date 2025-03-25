@@ -28,14 +28,6 @@ var ME = {
 var OP = {
     userNum: 0
 }
-var INPUT = {
-    startX: 0,
-    startY: 0,
-    down: false,
-    movement:{
-        w: false, s: false, a: false, d: false
-    }
-}
 
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
@@ -108,43 +100,6 @@ loaderGLB.load('assets/gbel.glb', (glb) => {
     gbelCont.add(gbel)
 })
 gbelCont.position.x = 5
-
-const controls = () => {
-    
-    window.addEventListener('keydown', e => {
-
-        switch(e.key.toLowerCase()){
-            case 'w':
-                ME.position.z--
-                break
-            case 's':
-                ME.position.z++
-                break
-            case 'a':
-                ME.position.x--
-                break
-            case 'd':
-                ME.position.x++
-                break
-            case ' ':
-                ME.position.y++
-                break
-            case 'shift':
-                ME.position.y--
-                break
-            case 'q':
-                action.paused = action.paused ? false : true
-                break
-        }
-        cameraCont.position.x = ME.position.x
-        cameraCont.position.y = ME.position.y
-        cameraCont.position.z = ME.position.z
-    
-        sendData()
-        playerColor()
-        opColor()
-    })
-}
 const playerColor = () => {
     if(ME.userNum == 0) cube.material.color.set('red')
     else cube.material.color.set('blue')
@@ -262,36 +217,18 @@ function animate() {
     renderer.render(scene, camera)
 }
 animate()
-controls()
-//orientace v prostoru
-function getAngle(length, sensitivity){
-    return Math.atan(length/sensitivity)
-}
-window.addEventListener('mousedown', e => {
-    INPUT.startX = e.clientX, INPUT.startY = e.clientY
-    INPUT.down = true
-})
-window.addEventListener('mouseup', e => {
-    INPUT.down = false
 
-    ME.rotation.y += getAngle(INPUT.startX - e.clientX, 250)
-    ME.rotation.z += getAngle(INPUT.startY - e.clientY, 250)
-
-    ME.rotation.x %= Math.PI
-    ME.rotation.y %= Math.PI
-    ME.rotation.z %= Math.PI
-
-    console.log(ME.rotation)
-})
-window.addEventListener('mousemove', e => {
-    
-    if(INPUT.down){
-
-        cameraCont.rotation.y = ME.rotation.y + getAngle(INPUT.startX - e.clientX, 250)
-        cameraParent.rotation.x = ME.rotation.z + getAngle(INPUT.startY - e.clientY, 250)
+//=============================================
+//              pohyb hrace
+//=============================================
+var INPUT = {
+    startX: 0,
+    startY: 0,
+    down: false,
+    movement:{
+        w: false, s: false, a: false, d: false
     }
-
-})
+}
 window.addEventListener('keydown', e =>{
 
     switch(e.key.toLowerCase()){
@@ -326,3 +263,92 @@ window.addEventListener('keyup', e =>{
             break
     }
 })
+const addMovement = (angle) => {
+
+    if(angle<0) angle+=Math.PI*2
+    if(angle>=Math.PI*2) angle%=Math.PI*2
+
+    let Z = Math.cos(angle), X = Math.sin(angle)
+    console.log(angle)
+
+    if(angle>=0&&angle<=Math.PI/2){
+        ME.position.x += X, ME.position.z -= Z
+        console.log('w')
+
+    }else if(angle>Math.PI/2 && angle<Math.PI){
+        ME.position.x -= X, ME.position.z += Z
+        console.log('d')
+
+    }else if(angle>=Math.PI && angle<=Math.PI*3/2){
+        ME.position.x -= X, ME.position.z += Z
+        console.log('s')
+
+    }else if(angle>Math.PI*3/2 && angle<Math.PI*2){
+        ME.position.x -= X, ME.position.z -= Z
+        console.log('a')
+    }
+}
+const controls = () => {
+    
+    window.addEventListener('keydown', e => {
+
+        switch(e.key.toLowerCase()){
+            case 'w':
+                addMovement(ME.rotation.y)
+                break
+            case 's':
+                addMovement(ME.rotation.y+Math.PI)
+                break
+            case 'a':
+                addMovement(ME.rotation.y)
+                break
+            case 'd':
+                addMovement(ME.rotation.y)
+                break
+            case ' ':
+                ME.position.y++
+                break
+            case 'shift':
+                ME.position.y--
+                break
+            case 'q':
+                action.paused = action.paused ? false : true
+                break
+        }
+        cameraCont.position.x = ME.position.x
+        cameraCont.position.y = ME.position.y
+        cameraCont.position.z = ME.position.z
+    
+        sendData()
+        playerColor()
+        opColor()
+    })
+}
+//orientace v prostoru
+function getAngle(length, sensitivity){
+    return Math.atan(length/sensitivity)
+}
+window.addEventListener('mousedown', e => {
+    INPUT.startX = e.clientX, INPUT.startY = e.clientY
+    INPUT.down = true
+})
+window.addEventListener('mouseup', e => {
+    INPUT.down = false
+
+    ME.rotation.y += getAngle(INPUT.startX - e.clientX, 250)
+    ME.rotation.z += getAngle(INPUT.startY - e.clientY, 250)
+
+    ME.rotation.x %= Math.PI*2
+    ME.rotation.y %= Math.PI*2
+    ME.rotation.z %= Math.PI*2
+})
+window.addEventListener('mousemove', e => {
+    
+    if(INPUT.down){
+
+        cameraCont.rotation.y = ME.rotation.y + getAngle(INPUT.startX - e.clientX, 250)
+        cameraParent.rotation.x = ME.rotation.z + getAngle(INPUT.startY - e.clientY, 250)
+    }
+
+})
+controls()
