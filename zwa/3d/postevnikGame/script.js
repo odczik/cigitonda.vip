@@ -271,19 +271,19 @@ const addMovement = (angle) => {
     let Z = Math.cos(angle), X = Math.sin(angle)
 
     if(angle>=0&&angle<=Math.PI/2){
-        ME.position.x -= X, ME.position.z -= Z
-        console.log('w')
+        ME.position.x += X, ME.position.z -= Z
+        console.log('w') 
 
     }else if(angle>Math.PI/2 && angle<Math.PI){
         ME.position.x += Z, ME.position.z += X
         console.log('d')
 
     }else if(angle>=Math.PI && angle<=Math.PI*3/2){
-        ME.position.x -= X, ME.position.z += Z
+        ME.position.x += Z, ME.position.z += Xd
         console.log('s')
 
     }else if(angle>Math.PI*3/2 && angle<Math.PI*2){
-        ME.position.x += Z, ME.position.z += X
+        ME.position.x -= Z, ME.position.z -= X
         console.log('aw')
     }
 }
@@ -293,16 +293,20 @@ const controls = () => {
 
         switch(e.key.toLowerCase()){
             case 'w':
-                addMovement(ME.rotation.y)
+                addMovement(0)
+                // ME.position.z--
                 break
             case 's':
-                addMovement(ME.rotation.y+Math.PI)
+                addMovement(Math.PI+0.1)
+                // ME.position.z++
                 break
             case 'a':
-                addMovement(ME.rotation.y)
+                addMovement(Math.PI/2*3)
+                // ME.position.x--
                 break
             case 'd':
-                addMovement(ME.rotation.y)
+                addMovement(Math.PI/2+0.1)
+                // ME.position.x++
                 break
             case ' ':
                 ME.position.y++
@@ -321,6 +325,8 @@ const controls = () => {
         sendData()
         playerColor()
         opColor()
+        
+        console.log(ME.position, ME.rotation)
     })
 }
 //orientace v prostoru
