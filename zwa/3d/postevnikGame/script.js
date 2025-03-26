@@ -272,7 +272,7 @@ const addMovement = (angle) => {
 
     let COS = Math.cos(angle%(Math.PI/2)), SIN = Math.sin(angle%(Math.PI/2))
     console.log("angle:", angle, "%ang", (angle)%(Math.PI/2))
-    console.log("sin", SIN, "cos", COS)
+    console.log("sin", SIN, "cos", COS) 
 
     if(angle>=0&&angle<Math.PI/2){
         ME.position.x -= SIN, ME.position.z -= COS
