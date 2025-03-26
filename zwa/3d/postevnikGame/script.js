@@ -265,26 +265,30 @@ window.addEventListener('keyup', e =>{
 })
 const addMovement = (angle) => {
 
+    angle+=ME.rotation.y
+
     if(angle<0) angle+=Math.PI*2
     if(angle>=Math.PI*2) angle%=Math.PI*2
 
-    let Z = Math.cos(angle), X = Math.sin(angle)
+    let COS = Math.cos(angle%(Math.PI/2)), SIN = Math.sin(angle%(Math.PI/2))
+    console.log("angle:", angle, "%ang", (angle)%(Math.PI/2))
+    console.log("sin", SIN, "cos", COS)
 
-    if(angle>=0&&angle<=Math.PI/2){
-        ME.position.x += X, ME.position.z -= Z
-        console.log('w') 
+    if(angle>=0&&angle<Math.PI/2){
+        ME.position.x -= SIN, ME.position.z -= COS
+        console.log('<0-90)') 
 
-    }else if(angle>Math.PI/2 && angle<Math.PI){
-        ME.position.x += Z, ME.position.z += X
-        console.log('d')
+    }else if(angle>=Math.PI/2 && angle<Math.PI){
+        ME.position.x -= COS, ME.position.z += SIN
+        console.log('<90-180)')
 
-    }else if(angle>=Math.PI && angle<=Math.PI*3/2){
-        ME.position.x += Z, ME.position.z += Xd
-        console.log('s')
+    }else if(angle>=Math.PI && angle<Math.PI*3/2){
+        ME.position.x += SIN, ME.position.z += COS
+        console.log('<180-270)')
 
-    }else if(angle>Math.PI*3/2 && angle<Math.PI*2){
-        ME.position.x -= Z, ME.position.z -= X
-        console.log('aw')
+    }else if(angle>=Math.PI*3/2 && angle<Math.PI*2){
+        ME.position.x += COS, ME.position.z -= SIN
+        console.log('<270-360)')
     }
 }
 const controls = () => {
@@ -297,15 +301,15 @@ const controls = () => {
                 // ME.position.z--
                 break
             case 's':
-                addMovement(Math.PI+0.1)
+                addMovement(Math.PI)
                 // ME.position.z++
                 break
             case 'a':
-                addMovement(Math.PI/2*3)
+                addMovement(Math.PI/2)
                 // ME.position.x--
                 break
             case 'd':
-                addMovement(Math.PI/2+0.1)
+                addMovement(Math.PI/2*3)
                 // ME.position.x++
                 break
             case ' ':
@@ -326,7 +330,7 @@ const controls = () => {
         playerColor()
         opColor()
         
-        console.log(ME.position, ME.rotation)
+        console.log(ME.position, ME.rotation, Math.PI/2)
     })
 }
 //orientace v prostoru
