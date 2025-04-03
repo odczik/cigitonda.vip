@@ -33,6 +33,17 @@ const generateTableCells = () => {
             div.appendChild(txt)
             cell.appendChild(div)
             row.appendChild(cell)
+
+            div.addEventListener('click', () => {
+
+                fetch('data.json')
+                    .then(response => response.json())
+                    .then(data => {
+
+                        console.log(data[div.innerText.toUpperCase()].question)
+                })
+                .catch(error => console.error('Error loading data:', error));
+            })
         
             counter++
         }
