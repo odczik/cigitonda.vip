@@ -60,6 +60,11 @@ const cube = new THREE.Mesh(geometry, material);
 scene.add(cube);
 cameraParent.add(cube)
 
+material = new THREE.MeshBasicMaterial({color: 'green'});
+geometry = new THREE.BoxGeometry(500, 1, 500);
+const floor = new THREE.Mesh(geometry, material);
+scene.add(floor);
+floor.position.y = -1
 const loaderGLB = new GLTFLoader();
 /*
 loaderGBL.load('assets/panacek0.glb', function (gltf){
@@ -100,6 +105,8 @@ loaderGLB.load('assets/gbel.glb', (glb) => {
     gbelCont.add(gbel)
 })
 gbelCont.position.x = 5
+gbelCont.position.y = 5
+
 const playerColor = () => {
     if(ME.userNum == 0) cube.material.color.set('red')
     else cube.material.color.set('blue')
@@ -206,7 +213,6 @@ function resizeScene(){
 resizeScene()
 window.addEventListener('resize', resizeScene)
 
-
 const clock = new THREE.Clock()
 function animate() {
     requestAnimationFrame(animate)
@@ -217,7 +223,6 @@ function animate() {
     renderer.render(scene, camera)
 }
 animate()
-
 //=============================================
 //              pohyb hrace
 //=============================================
