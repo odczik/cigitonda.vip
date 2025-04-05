@@ -107,3 +107,4 @@ const dataCheck = () => {
     .catch(error => console.error('Error loading data:', error));
 }
 // dataCheck()
+// skap
