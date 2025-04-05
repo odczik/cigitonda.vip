@@ -6,6 +6,11 @@
     <title>Document</title>
 </head>
 <style>
+    body{
+        font-family: "Roboto", sans-serif;
+    }
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
     tr{
         display: flex;
         align-items: center;
@@ -15,7 +20,7 @@
     .hexagon {
         width: 10vh;
         height: 11.34vh;
-        background-color: rgb(200,200,200);
+        background-color: rgb(160,160,160);
         clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
         cursor: pointer;
     }
@@ -36,6 +41,28 @@
         left: 50%; top: 5%;
         transform: translateX(-50%);
     }
+    #question, #answer{
+        border: 1px solid black;
+        height: 10vh;
+        width: 50vw;
+    
+        padding: 2%;
+    }
+    #answer{
+        height: 5vh;
+    }
+    #isCrr input{
+        margin-top: 0.8vh;
+        height: 2vh;
+    }
+    #isCrr{
+        margin-left: 1vh;
+    }
+    main{
+        position: absolute;
+        top: 100%; left: 50%;
+        transform: translate(-50%, -120%);
+    }
     @media(orientation: portrait){
         .hexagon{
             width: 10vw;
@@ -49,11 +76,39 @@
         }
     }
 </style>
-<body>
+<body id="body">
     <input type="range" id="velikostPole" step="1" min="3" max="7" value="7">
     <label for="velikostPole" id="velikostPoleLabel">7</label>
 
     <table id="table"></table>
+
+    <main>
+        <div>
+            <h3>
+                question
+            </h3>
+            <h4>
+                <div id="question">
+                    
+                </div>
+            </h4>
+        </div>
+        <div>
+            <h3>
+                answer
+                <input type="checkbox" id="displayAnswer">
+            </h3>
+            <h4 style="display: flex;">
+                <div id="answer">
+                    
+                </div>
+                <div id="isCrr">
+                    <input onclick="isCorrect(true)" type="button" id="crr" value="✅"><br>
+                    <input onclick="isCorrect(false)" type="button" id="ncrr" value="❌">
+                </div>
+            </h4>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>

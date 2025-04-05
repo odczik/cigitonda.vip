@@ -1,7 +1,39 @@
-const table = document.getElementById('table')
+const table = document.getElementById('table'), body = document.getElementById('body')
 const velikostPole = document.getElementById('velikostPole'), velikostPoleLabel = document.getElementById('velikostPoleLabel')
-// const abeceda = 'ABCDEFGHIJKLMNOPQRSTUVWY'
-const abeceda = 'abcdefghijklmnopqrstuvwy'
+const question = document.getElementById('question'), answer = document.getElementById('answer')
+const displayA = document.getElementById('displayAnswer')
+
+const abeceda = 'ABCDEFGHIJKLMNOPQRSTUVWY'
+// const abeceda = 'abcdefghijklmnopqrstuvwy'
+var last = null, tah = Math.floor(Math.random()*2) == 0 ? true : false
+
+const naTahu = () => {
+    if(tah) body.style.background = 'rgb(200,50,50)'
+    else body.style.background = 'rgb(100,100,200)'
+}
+naTahu()
+const checkA = () => {
+    if(displayA.checked){
+        answer.style.color = 'rgb(0,0,0)'
+    }else{
+        answer.style.color = 'rgba(0,0,0,0)'
+    }
+}
+const isCorrect = (TF) => {
+
+    let div = document.getElementById(`div${last}`)
+    if(TF) div.style.backgroundColor = tah ? 'rgb(255, 102, 0)' : 'rgb(0, 102, 255)'
+    else{
+        div.style.backgroundColor = 'black'
+        div.style.color = 'white'
+    }
+
+    if(tah) tah = false
+    else tah = true
+    naTahu()
+}
+checkA()
+displayA.addEventListener('change', checkA)
 
 velikostPole.addEventListener('change', () => {
     velikostPoleLabel.innerText = velikostPole.value
@@ -40,7 +72,18 @@ const generateTableCells = () => {
                     .then(response => response.json())
                     .then(data => {
 
-                        console.log(data[div.innerText.toUpperCase()].question)
+                        displayA.checked = false
+                        answer.style.color = 'rgba(0,0,0,0)'
+
+                        try{
+                            document.getElementById(`div${last}`).style.textShadow = ''
+                        }catch(error){}
+                        div.style.textShadow = '0 0 5px white'
+
+                        question.innerText = data[txt.innerText].question
+                        answer.innerText = data[txt.innerText].answer
+
+                        last = `${x}-${y}`
                 })
                 .catch(error => console.error('Error loading data:', error));
             })
@@ -58,7 +101,7 @@ const dataCheck = () => {
         .then(data => {
 
             for(let i of abeceda){
-                console.log(i, data[i.toUpperCase()].answer)
+                console.log(i, data[i].answer)
             }
     })
     .catch(error => console.error('Error loading data:', error));
