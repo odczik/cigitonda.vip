@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    input[type="radio"]{
+        position: absolute;
+    }
+    input[type="radio"]{
+        position: relative;
+        top: -100%; left: 0;
+
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+    main{
+        height: 50vh; width: 50vh;
+    }
+    #l-r{
+        height: 10%; width: 100%;
+        display: flex;
+        border: 1px solid black;
+    }
+
+    .formCont{
+        position: absolute;
+    }
+    .formCont{
+        position: relative;
+        top: 0; left: 0;
+
+        background-color: gray;
+        height: 50%;
+    }
+    .chooseForm{
+        /* background-color: rgba(255,0,0,0.2);
+        border: 1px solid red; */
+        width: 20%;
+        padding: 2.5%; margin: 0;
+    }
+    .chooseForm div{
+        height: 100%; width: 100%;
+    }
+    @media(orientation: portrait){
+        main{
+            width: 50vw; height: 50vw;
+        }
+    }
+</style>
+<body>
+
+    <main>
+        <div id="l-r">
+            <div class="chooseForm">
+                <div>login</div>
+                <input type="radio" name="form" id="login">
+            </div>
+            <div class="chooseForm">
+                <div>register</div>
+                <input type="radio" name="form" id="register">
+            </div>
+        </div>
+
+        <div class="formCont">
+
+            <form>
+                <input type="text">
+            </form>    
+
+        </div>
+        <div class="formCont">
+
+            
+
+        </div>
+    </main>
+    
+    <script>
+        document.getElementById('login').addEventListener('click', () => {
+            console.log("login")
+        })
+        document.getElementById('register').addEventListener('click', () => {
+            console.log("register")
+        })
+    </script>
+</body>
+</html>
