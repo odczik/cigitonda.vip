@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <style>
+    body{
+        background-color: #cccccc;
+    }
     input[type="radio"]{
         position: absolute;
     }
@@ -15,77 +18,156 @@
 
         width: 100%;
         height: 100%;
-        opacity: 0;
+        /* opacity: 0; */
         cursor: pointer;
     }
     main{
         height: 50vh; width: 50vh;
+    }
+    .formDiv{
+        position: absolute;
+    }
+    .formDiv{
+        position: relative;
+        top: 50%;
+
+        width: 50%;
+    }
+    form{
+        display: flex;
+    }
+    form h3{
+        height: 5vh;
     }
     #l-r{
         height: 10%; width: 100%;
         display: flex;
         border: 1px solid black;
     }
+    #loginForm{
+        z-index: 999;
+    }
+    .info{
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-    .formCont{
-        position: absolute;
+        /* border: 1px solid black; */
+        height: 5vh;
+
+        font-size: 1.6em;
+
+        margin-bottom: 1vh;
+    }
+    .input{
+        width: 80%;
+        margin: auto;
+        border-radius: 10px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border: 0 solid black;
+        height: 4vh;
+
+        font-size: 1.6em;
+
+        margin-right: 100%;
+        margin-top: 1vh;
+        margin-bottom: 1.6vh;
     }
     .formCont{
-        position: relative;
-        top: 0; left: 0;
 
-        background-color: gray;
-        height: 50%;
+        position: absolute;
+        top: 50%; left: 50%;
+        transform: translate(-50%, -50%);
+
+        border: 2px solid black;
+
+        padding: 1%;
+
+        background-color: #cccccc;
+        width: 6vh; height: 5vh;
     }
     .chooseForm{
-        /* background-color: rgba(255,0,0,0.2);
-        border: 1px solid red; */
         width: 20%;
         padding: 2.5%; margin: 0;
+    }
+    .overRadio{
+        background-color: rgba(255,0,0,0.2);
+        font-size: 2em;
+        font-weight: bold
+    }
+    .overRadio div{
+        background-color: rgba(0,255,0,0.2);
+        height: 50%
     }
     .chooseForm div{
         height: 100%; width: 100%;
     }
     @media(orientation: portrait){
-        main{
-            width: 50vw; height: 50vw;
+        .formCont{
+            width: 6+w;height: 70vw;
+            padding: 2%;
         }
     }
 </style>
 <body>
 
-    <main>
-        <div id="l-r">
-            <div class="chooseForm">
+    <div id="l-r">
+        <div class="chooseForm">
+            <div class="overRadio">
                 <div>login</div>
-                <input type="radio" name="form" id="login">
             </div>
-            <div class="chooseForm">
+            <input type="radio" name="form" id="login">
+        </div>
+        <div class="chooseForm">
+            <div class="overRadio">    
                 <div>register</div>
-                <input type="radio" name="form" id="register">
             </div>
+            <input type="radio" name="form" id="register">
         </div>
+    </div>
 
-        <div class="formCont">
 
-            <form>
-                <input type="text">
-            </form>    
+    <div class="formCont" id="loginForm">
+        <form>
+            <div class="formDiv">
+                <div class="info">username:</div >
+                <div class="info">password:</div >
+                <div class="info">username:</div >
+                <div class="info">password:</div >
+                <div class="info">username:</div >
+                <div class="info">password:</div >
+            </div>
+            <div class="formDiv">
+                <input class="input" type="text">
+                <input class="input" type="text">
+                <input class="input" type="text">
+                <input class="input" type="text">
+                <input class="input" type="text">
+                <input class="input" type="text">
+            </div>
+        </form>    
 
-        </div>
-        <div class="formCont">
-
-            
-
-        </div>
-    </main>
-    
+    </div>
+    <div class="formCont" id="registerFomr">
+        <form>
+            <h3>username: </h3>
+            <input type="text" id="username" name="username">
+        </form>
+    </div>    
     <script>
+        const registerForm = document.getElementById('registerForm'), loginForm = document.getElementById('loginForm')
+
         document.getElementById('login').addEventListener('click', () => {
-            console.log("login")
+            loginForm.style.zIndex = 999
+            registerForm.style.zIndex = 0    
         })
         document.getElementById('register').addEventListener('click', () => {
-            console.log("register")
+            loginForm.style.zIndex = 0
+            registerForm.style.zIndex = 999
         })
     </script>
 </body>
