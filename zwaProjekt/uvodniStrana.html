@@ -18,18 +18,19 @@
 
         width: 100%;
         height: 100%;
-        /* opacity: 0; */
+        opacity: 0;
         cursor: pointer;
     }
     main{
         height: 50vh; width: 50vh;
     }
     .formDiv{
-        position: absolute;
+        position: relative;
     }
     .formDiv{
-        position: relative;
+        position: absolute;
         top: 50%;
+        transform: translateY(-50%);
 
         width: 50%;
     }
@@ -40,9 +41,13 @@
         height: 5vh;
     }
     #l-r{
-        height: 10%; width: 100%;
+        height: 10vh; width: 60vh;
         display: flex;
-        border: 1px solid black;
+
+        position: absolute;
+        top: 50%; left: 50%;
+
+        transform: translate(-30vh, -36vh);
     }
     #loginForm{
         z-index: 999;
@@ -73,7 +78,7 @@
 
         font-size: 1.6em;
 
-        margin-right: 100%;
+        /* margin-right: 100%; */
         margin-top: 1vh;
         margin-bottom: 1.6vh;
     }
@@ -87,50 +92,72 @@
 
         padding: 1%;
 
-        background-color: #cccccc;
-        width: 6vh; height: 5vh;
+        background-color: #afafaf;
+        width: 60vh; height: 50vh;
     }
     .chooseForm{
-        width: 20%;
-        padding: 2.5%; margin: 0;
+        width: 35%;
+        padding: 3%;
     }
     .overRadio{
-        background-color: rgba(255,0,0,0.2);
+
+        transform: translate(-4%, 10%);
+
+        padding: 5%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         font-size: 2em;
-        font-weight: bold
+        font-weight: bold;
+
+        box-shadow: -2px -2px 0  
+    
+        border-radius: 10px 10px 0 0;
     }
     .overRadio div{
-        background-color: rgba(0,255,0,0.2);
-        height: 50%
+        height: 50%;
     }
     .chooseForm div{
         height: 100%; width: 100%;
     }
     @media(orientation: portrait){
         .formCont{
-            width: 6+w;height: 70vw;
+            width: 60vw;height: 70vw;
             padding: 2%;
+        }
+        #l-r{
+            width: 60vw; height: 12vw;
+            transform: translate(-30vw, -50vw);
+        }
+        .info{
+            height: 7vw;
+            margin-bottom: 1vw;
+        }
+        .input{
+            height: 6vw;
+            margin-top: 1vw;
+            margin-bottom: 1.6vw;
         }
     }
 </style>
 <body>
 
     <div id="l-r">
-        <div class="chooseForm">
+        <div class="chooseForm" id="chfl">
             <div class="overRadio">
                 <div>login</div>
             </div>
             <input type="radio" name="form" id="login">
         </div>
-        <div class="chooseForm">
+        <div class="chooseForm" id="chfr">
             <div class="overRadio">    
                 <div>register</div>
             </div>
             <input type="radio" name="form" id="register">
         </div>
     </div>
-
-
     <div class="formCont" id="loginForm">
         <form>
             <div class="formDiv">
@@ -141,7 +168,7 @@
                 <div class="info">username:</div >
                 <div class="info">password:</div >
             </div>
-            <div class="formDiv">
+            <div class="formDiv" style="left: 40%;">
                 <input class="input" type="text">
                 <input class="input" type="text">
                 <input class="input" type="text">
@@ -160,10 +187,13 @@
     </div>    
     <script>
         const registerForm = document.getElementById('registerForm'), loginForm = document.getElementById('loginForm')
+        const regCont = document.getElementById('chfr'), logCont = document.getElementById('chfl')
 
         document.getElementById('login').addEventListener('click', () => {
             loginForm.style.zIndex = 999
-            registerForm.style.zIndex = 0    
+            registerForm.style.zIndex = 0
+
+            logCont.style.background
         })
         document.getElementById('register').addEventListener('click', () => {
             loginForm.style.zIndex = 0
