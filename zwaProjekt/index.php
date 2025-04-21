@@ -7,6 +7,8 @@
 </head>
 <body>
     skap
-    <script></script>
+    <script>
+        window.alert("skap");
+    </script>
 </body>
 </html>
