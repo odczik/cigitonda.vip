@@ -102,7 +102,8 @@ const DIRS = {
     'assets/kocky/': 14,
     'assets/trida/': 21,
     'assets/starwars/': 47,
-    'assets/starWarsMovies/': 12
+    'assets/starWarsMovies/': 12,
+    'assets/got/': 21
 }
 directory.addEventListener('change', () =>{
     clearTable()
