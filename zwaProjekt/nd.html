@@ -5,7 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<style>
+    iframe{
+        position: absolute;
+        top: 0; left: 0;
+        width: 100vw; height: 100vh;
+    }
+    #myCont{
+        position: absolute;
+    }
+</style>
 <body>
+    <iframe src="uvodniStrana.html" frameborder="0" id="inFrame"></iframe>
     
     <form>
         <input type="text" id="jmeno">
@@ -16,5 +27,20 @@
         <input type="submit" value="submit">
     </form>
 
+    <div id="myCont">
+        <input type="button" onclick="togleOpacity()" value="opacity">
+    </div>
+    
+    <script>
+        var skap = true
+        function togleOpacity(){
+            const iFrameE = document.getElementById('inFrame')
+            if(skap) iFrameE.style.opacity = '0'
+            else iFrameE.style.opacity = '1'
+
+            skap = skap ? false:true
+            console.log(skap)
+        }
+    </script>
 </body>
 </html>

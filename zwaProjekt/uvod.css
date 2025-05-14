@@ -32,13 +32,20 @@ form{
 form h3{
     height: 5vh;
 }
+#login-register{
+    background-color: #cccccc;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: 3;
+}
 #l-r{
     height: 10vh; width: 60vh;
     display: flex;
 
     position: absolute;
     top: 50%; left: 50%;
-
+    z-index: 5;
     transform: translate(-26vh, -32vh);
 }
 #loginForm{
@@ -132,6 +139,7 @@ form h3{
     /* box-shadow: -2px -2px 3px black inset, 2px 2px 3px white inset; */
     box-shadow: 0 0 5px black;
     border: 2px solid rgba(255,255,255,0.6);
+    background-color: #cccccc;
 
     border-radius: 10px 10px 0 0;
 }
