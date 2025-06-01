@@ -1,35 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+<head>	
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>snake</title>
 </head>
+<style>
+#playingField{
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+
+	background-color: black;
+	width: 50vw; height: 50vw;	
+	
+}
+#myCanvas{
+	width: 100%; height: 100%;
+}
+</style>
 <body>
+	<div id="score">1</div>    	
+	<div id="playingField">
+		<canvas id="myCanvas" height="500" width="500">
+	</div>
+	
+<script>
+	const canvas = document.getElementById('myCanvas')
+	const ctx = canvas.getContext('2d')
+	
+  // ctx.fillStyle = "red"
+  // ctx.fillRect(0,0,100,100)
   
-  <iframe src="skap.html" frameborder="0"></iframe>
-  <iframe frameborder="0" id="skap">
+	var score = 1
+	var SNAKE = {
+		body: [[0,0]],
+		up: false, right: true, down: false, left: false
+	}
+	var fruit = [0,0]
+	
+	function setFruitLocation(){
+		do{
+			fruit[0] = Math.floor(Math.random()*10)
+			fruit[1] = Math.floor(Math.random()*10)
+		}while(snake.includes(fruit))
+	}
+	function displaySnake_fruit(){
+		let first = true
+		for(let i of SNAKE.body){
+			if(first) ctx.fillStyle = "white"
+			else ctx.fillStyle = "rgb(180,180,180)"
+				
+			ctx.fillRect(50*i[0], 50*i[1], 50, 50)
+		}
+		ctx.fillStyle = "red"
+		ctx.fillRect(fruit[0]*50, fruit[1]*50, 50, 50)
+	}
+	window.addEventListener("keydown", e => {
+    console.log(e.key)
+		switch(e.key){
+			case "w":
+				SNAKE.up = true
+				SNAKE.right = false
+				SNAKE.left = false
+				SNAKE.down = false
+				break
+			case "s":
+				SNAKE.up = false
+				SNAKE.right = false
+				SNAKE.down = true
+				SNAKE.left = false
+				break
+			case "a":
+				SNAKE.up = false
+				SNAKE.right = false
+				SNAKE.down = false
+				SNAKE.left = true
+				break
+			case "d":
+				SNAKE.up = false
+				SNAKE.right = true
+				SNAKE.down = false
+				SNAKE.left = false
+				break
+		}
+	})
+	let mainInterval = setInterval(() => {
 
-  </iframe>
+		displaySnake_fruit()
+	
+		if(SNAKE.up) SNAKE.body.unshift([SNAKE.body[0][0], SNAKE.body[0][1]-1])
+		else if(SNAKE.down) SNAKE.body.unshift([SNAKE.body[0][0], SNAKE.body[0][1]+1])
+		else if(SNAKE.left) SNAKE.body.unshift([SNAKE.body[0][0]-1, SNAKE.body[0][1]])
+		else if(SNAKE.right) SNAKE.body.unshift([SNAKE.body[0][0]+1, SNAKE.body[0][1]])
 
-  <script>
-    const iFrame = document.getElementById('skap')
+    console.log(SNAKE)
 
-    iFrame.querySelector('body').innerHTML = `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
-    </head>
-    <body>
-      
-      <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est, id! Reiciendis voluptas rem quidem, corrupti suscipit quis eius cumque perferendis doloribus error quisquam asperiores rerum ullam architecto eveniet, dicta dolore?</div>
+		if(SNAKE.body[0][0] == fruit[0] && SNAKE.body[0][1] == fruit[1]) document.getElementById("score").innerText = score
+		else SNAKE.body.pop()
 
-    </body>
-    </html>`
+		
 
-  </script>
+	}, 1000)
+</script>
 
 </body>
 </html>
