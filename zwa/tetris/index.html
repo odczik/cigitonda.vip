@@ -8,33 +8,29 @@
 <style>
     body{
         background-color: black;
-        color: white;
     }
-    canvas{
+    #playingField{
         position: absolute;
         top: 50%; left: 50%;
         transform: translate(-50%, -50%);
-        height: 95vh; width: 47.5vh;
-        
-        border: 0.1vh solid white;
-        border-radius: 1vh;
-        box-shadow: 0 0 2.5vh white;
-
-        background-color: black;
+        width: 50vh; height: 100vh;
+        border: 1px solid white;
+        /* border-right: 1px solid white; */
     }
-    #scoreContainer{
-        position: absolute; 
-        top: 0; left: 0;
-        display: flex;
+    #myCanvas{
+        width: 100%; height: 100%;
+    }
+    @media(orientation: portrait){
+        #playingField{
+            width: 50vw; height: 100vw;
+        }
     }
 </style>
 <body>
     
-    <div id="scoreContainer">
-        <div>score: </div>
-        <div id="score">0</div>
+    <div id="playingField">
+        <canvas id="myCanvas"></canvas>
     </div>
-    <canvas id="myCanvas"></canvas>
 
     <script src="shapes.js"></script>
     <script src="script.js"></script>
