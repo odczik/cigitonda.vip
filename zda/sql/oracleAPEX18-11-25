@@ -1,0 +1,28 @@
+create table MATURANT(
+    cislo int not null primary key,
+    jmeno varchar(10) not null,
+    prijmeni varchar(20) not null,
+    funkce varchar(11),
+    rodneCislo varchar(11),
+    ridickeOpravneni varchar(3)
+)
+
+ALTER TABLE MATURANT
+ADD UNIQUE (rodneCislo)
+
+ALTER TABLE MATURANT
+RENAME COLUMN ridickeOpravneni TO ridicak
+
+insert into MATURANT(cislo,jmeno,prijmeni,rodne_cislo,ridicke_opravneni)
+values(1,'anicka','tkanicka','0305060101','ANO')
+
+insert into MATURANT(cislo,jmeno,prijmeni,rc,ridicak)
+values(0,'Lukas','Macura','0305060102','NE')
+
+create table TRIDA(
+    idTridy varchar(4) not null primary key,
+    student int not null,
+    tridniUcitel varchar(16) not null,
+
+    foreign key (student) references MATURANT(cislo)
+) 
