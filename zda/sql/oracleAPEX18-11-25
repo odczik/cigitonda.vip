@@ -19,10 +19,58 @@ values(1,'anicka','tkanicka','0305060101','ANO')
 insert into MATURANT(cislo,jmeno,prijmeni,rc,ridicak)
 values(0,'Lukas','Macura','0305060102','NE')
 
+insert into MATURANT(cislo,jmeno,prijmeni,rc,ridicak)
+values(3,'Petr','Le','0123456789', 'ANO')
+
+insert into MATURANT(cislo,jmeno,prijmeni,rc)
+values(4,'Karel','Barel','1123456789')
+
+insert into MATURANT(cislo,jmeno,prijmeni,rc)
+values(5,'dratenkaKutil','aOpravar','2123456789')
+
+insert into MATURANT(cislo,jmeno,prijmeni,rc)
+values(6,'david','Schizofrenik','3123456789')
+
 create table TRIDA(
     idTridy varchar(4) not null primary key,
     student int not null,
     tridniUcitel varchar(16) not null,
 
     foreign key (student) references MATURANT(cislo)
-) 
+)
+ALTER TABLE MATURANT
+ADD datum_ustni_zkousky DATE
+
+UPDATE MATURANT
+SET datum_ustni_zkousky = TO_DATE('17.05.2024', 'DD.MM.YYYY')
+WHERE cislo = 3;
+
+UPDATE MATURANT
+SET datum_ustni_zkousky = TO_DATE('24.5.2024', 'DD.MM.YYYY')
+WHERE jmeno != 'Petr'
+
+create table DAREK(
+    cisloDarku int not null primary key,
+    nazev varchar(255) not null,
+    hmotnostG int not null,
+    prijemce int
+)
+-- vytvoreni relace kdyz obe tabulky existuji
+alter table DAREK
+add constraint fkDarekMaturant foreign key (prijemce) references MATURANT (cislo)
+
+alter table DAREK
+drop column hmotnostG
+
+insert into DAREK(cisloDarku, nazev, prijemce)
+values(0,'prirucni bidet',0)
+
+alter table DAREK
+modify prijemce not null
+
+update DAREK
+set nazev = 'kolobezka'
+--where (mel sem jenom jeden zaznam)
+
+alter table DAREK
+add constraint kontrola_vstupu check(hmotnostG > 0)

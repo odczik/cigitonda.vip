@@ -1,4 +1,4 @@
-create table ZAKAZNICI(
+Wcreate table ZAKAZNICI(
 
     idZakaznika counter(16) not null primary key,
     jmeno varchar(255) not null,
