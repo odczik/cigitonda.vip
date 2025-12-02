@@ -1,0 +1,19 @@
+celkovy pocet zamestnancu
+
+volne pokoje
+
+pocet navstevniku za urcitou dobu
+
+zamestnanci co meli smenu v urcenem obdobi
+
+celkovy vydelek za urcitou dobu (i s danema estli se citis)
+
+kolik navstevnik utratil za obedy
+
+kdy byla naposledy uklidova sluzba na pokoji
+
+vyplata pro zamestance
+
+nejnavstevovanejsi pokoje
+
+nejoblibenejsi pokrmy
