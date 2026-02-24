@@ -53,3 +53,4 @@ FROM departments D CROSS JOIN DEPARTMENTS B
 WHERE D.department_name NOT LIKE B.department_name
 
 SELECT * FROM kdo_vi_povi
+
