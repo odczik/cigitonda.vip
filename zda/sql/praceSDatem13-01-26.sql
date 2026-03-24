@@ -48,3 +48,6 @@ FLOOR(SYSDATE - TO_DATE('01-Jan-'||EXTRACT(YEAR FROM SYSDATE), 'dd-mon-yyyy'))+1
 FROM DUAL
 
 --7
+SELECT hire_date, Round(Months_between(sysdate, hire_date)/12, 2) AS pocet_let, first_name, last_name
+FROM employees
+WHERE Substr(last_name, Length(last_name), 1) = 's'
